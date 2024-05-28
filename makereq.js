@@ -110,7 +110,7 @@ function makeRequest(eventID, bookmaker, sectionContent) {
                 <img src="${inforeq.url}" alt="${outcome.description}">
                 <div class="info">
                   <div class="player-info">
-                    <div>${outcome.description} ${outcome.name}</div>
+                    <div>${outcome.description}</div>
                   </div>
                   <div class="points">
                     ${outcome.point} <span>${formattedMarketName}</span>
