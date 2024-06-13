@@ -80,7 +80,6 @@ function makeRequest(eventID, bookmaker, sectionContent) {
         var inforeq = findPlayerId(outcome.description);
         var idnumbr = inforeq.id;
         var onPrizePicksCheck = findstats(idnumbr, outcome.market);
-        var filterBY = document.getElementById("quantity").value;
 
         if (noVIG > filterBY && onPrizePicksCheck == outcome.point) {
           if(outcome.name == "Under"){

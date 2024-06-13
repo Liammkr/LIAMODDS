@@ -1,36 +1,4 @@
-var apiKey = "491f5f92d61bab1c3f4767f31a044794";
-var result = "error";
-var jsonData = null;
-var MLBjsonData,
-  NBAjsonData,
-  sportvalue,
-  playerName,
-  sortedOutcomes, imageurl,
-  currentLine;
-var filterBY = null;
-if (localStorage.getItem("filter") != null) {
-  var filterBY = localStorage.getItem("filter");
-} else {
-  localStorage.setItem("filter", 50);
-  var filterBY = 50
-}
-document.getElementById("quantity").value = filterBY;
-document.getElementById("quantity").addEventListener("input", function (event) {
-  localStorage.setItem("filter", document.getElementById("quantity").value);
-});
-
-var sport = null;
-if (localStorage.getItem("sport") != null) {
-  var sport = localStorage.getItem("sport");
-} else {
-  localStorage.setItem("sport", "basketball_nba");
-  var sport = "basketball_nba"
-}
-document.getElementById("sportSelect").value = sport;
-document.getElementById("sportSelect").addEventListener("input", function (event) {
-  localStorage.setItem("sport", document.getElementById("sportSelect").value);
-});
-var teamNumberMap = {
+var nbamap = {
   celtics: 38,
   knicks: 52,
   bucks: 49,
@@ -61,6 +29,42 @@ var teamNumberMap = {
   grizzlies: 63,
   spurs: 59,
   blazers: 57,
+};
+var nhlmap = {
+  ducks: "ANA",
+  coyotes: "ARI",
+  bruins: "BOS",
+  sabres: "BUF",
+  flames: "CGY",
+  hurricanes: "CAR",
+  blackhawks: "CHI",
+  avalanche: "COL",
+  bluejackets: "CBJ",
+  stars: "DAL",
+  redwings: "DET",
+  oilers: "EDM",
+  panthers: "FLA",
+  kings: "LAK",
+  wild: "MIN",
+  canadiens: "MTL",
+  predators: "NSH",
+  devils: "NJD",
+  islanders: "NYI",
+  rangers: "NYR",
+  senators: "OTT",
+  flyers: "PHI",
+  penguins: "PIT",
+  sharks: "SJS",
+  kraken: "SEA",
+  blues: "STL",
+  lightning: "TBL",
+  mapleleafs: "TOR",
+  canucks: "VAN",
+  goldenknights: "VGK",
+  capitals: "WSH",
+  jets: "WPG",
+}
+var mlbmap = {
   angels: 108,
   diamondbacks: 109,
   orioles: 110,
@@ -90,8 +94,131 @@ var teamNumberMap = {
   sox: 145,
   marlins: 146,
   yankees: 147,
-  brewers: 158
+  brewers: 158,
+}
+var wnbamap = {
+  dream: 30,
+  sky: 29,
+  sun: 23,
+  fever: 25,
+  liberty: 13,
+  mystics: 22,
+  wings: 21,
+  aces: 19,
+  sparks: 20,
+  lynx: 24,
+  mercury: 17,
+  storm: 28
+}
+function getData(url) {
+  const corsAnywhereUrl = url;
+
+  const headers = {
+    'Origin': window.location.origin 
+  };
+
+  return fetch(corsAnywhereUrl, { headers })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .catch(error => {
+      throw error;
+    });
+}
+firebaseConfig = {
+  apiKey: "AIzaSyB_ve0_tAF3TbkH_sF9i8Td7EltJf_m_e0",
+  authDomain: "liamkrodds.firebaseapp.com",
+  databaseURL: "https://liamkrodds-default-rtdb.firebaseio.com",
+  projectId: "liamkrodds",
+  storageBucket: "liamkrodds.appspot.com",
+  messagingSenderId: "62124083693",
+  appId: "1:62124083693:web:d8650c5ede061bc666bfe4",
+  measurementId: "G-ZLSBRFXPP0"
 };
+firebase.initializeApp(firebaseConfig);
+ 
+var database = firebase.database();
+
+var data, newdata
+// Read initial data and update status
+/*database
+  .ref("liamkr")
+  .once("value")
+  .then(function (snapshot) {
+    data = snapshot.val();
+    console.log(data.apikey); // Do something with the data
+    getData(data.uploaded_text_url)
+    .then(data => {
+      NBAjsonData = data;
+      console.log(NBAjsonData); // Do something with the fetched data
+      finditem()
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
+*/
+getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NBA?alt=media")
+    .then(data => {
+      NBAjsonData = data;
+      console.log("NBA Loaded")});
+getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/MLB?alt=media")
+    .then(data => {
+      MLBjsonData = data;
+      console.log("MLB Loaded")}); // Do something with the fetched data
+getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NHL?alt=media")
+    .then(data => {
+      NHLjsonData = data;
+      console.log("NHL Loaded")});
+getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/WNBA?alt=media")
+    .then(data => {
+      WNBAjsonData = data;
+      console.log("WNBA Loaded")}); // Do something with the fetched data
+// Update status whenever there's a change in the database
+var start = {
+  run_script : true
+}
+database.ref("liamkr").update(start);
+
+
+var apiKey = "491f5f92d61bab1c3f4767f31a044794";
+var result = "error";
+var jsonData = null;
+var MLBjsonData,
+  NBAjsonData,
+  sportvalue,
+  playerName,
+  sortedOutcomes, imageurl,
+  currentLine;
+var filterBY = 50;
+/*if (localStorage.getItem("filter") != null) {
+  var filterBY = localStorage.getItem("filter");
+} else {
+  localStorage.setItem("filter", 50);
+  var filterBY = 50
+}
+document.getElementById("quantity").value = filterBY;
+document.getElementById("quantity").addEventListener("input", function (event) {
+  localStorage.setItem("filter", document.getElementById("quantity").value);
+});*/
+
+var sport = null;
+if (localStorage.getItem("sport") != null) {
+  var sport = localStorage.getItem("sport");
+} else {
+  localStorage.setItem("sport", "basketball_nba");
+  var sport = "basketball_nba"
+}
+document.getElementById("sportSelect").value = sport;
+document.getElementById("sportSelect").addEventListener("input", function (event) {
+  localStorage.setItem("sport", document.getElementById("sportSelect").value);
+});
 function hideAllSectionContents() {
     var sectionContents = document.querySelectorAll('.section-content');
     sectionContents.forEach(function(section) {
@@ -109,14 +236,6 @@ function loadDataFromFile(filePath, callback) {
   };
   xhr.send();
 }
-window.onload = function () {
-    loadDataFromFile("NBA.txt", function (NBAcontent) {
-      NBAjsonData = NBAcontent;
-    loadDataFromFile("MLB.txt", function (MLBcontent) {
-      MLBjsonData = MLBcontent;
-    });
-  });
-};
 
 document.getElementById("sportSelect").addEventListener("change", function () {
   if (this.value == "basketball_nba") {
@@ -179,9 +298,19 @@ document.getElementById("sportSelect").addEventListener("change", function () {
 
         function findTeamNumber(teamName) {
           var lowercaseTeamName = teamName.toLowerCase();
-          if (lowercaseTeamName in teamNumberMap) {
-            return teamNumberMap[lowercaseTeamName];
-          } else {
+            if(sportvalue =="NBA"){
+              return nbamap[lowercaseTeamName];
+            }
+            if(sportvalue =="MLB"){
+              return mlbmap[lowercaseTeamName];
+            }
+            if(sportvalue =="NHL"){
+              return nhlmap[lowercaseTeamName];
+            }
+            if(sportvalue =="WNBA"){
+              return wnbamap[lowercaseTeamName];
+            }
+          else {
             return "Team not found" + teamName;
           }
         }
@@ -199,8 +328,17 @@ document.getElementById("sportSelect").addEventListener("change", function () {
             var awayUrl = "https://www.mlbstatic.com/team-logos/team-primary-on-light/"+ awayteamNumber+ ".svg";
             var imageSizeWidth = 80;
             var imageSizeHeight = 80;
-       }
-        else{
+       } else if(sportvalue == "NHL"){
+            var homeUrl = "https://assets.nhle.com/logos/nhl/svg/"+hometeamNumber+"_dark.svg"; 
+            var awayUrl = "https://assets.nhle.com/logos/nhl/svg/"+awayteamNumber+"_dark.svg";
+            var imageSizeWidth = 100;
+            var imageSizeHeight = 100;
+       } else if(sportvalue == "WNBA"){
+        var homeUrl = "https://cdn.wnba.com/logos/wnba/16116613"+hometeamNumber+"/global/D/logo.svg"; 
+        var awayUrl = "https://cdn.wnba.com/logos/wnba/16116613"+awayteamNumber+"/global/D/logo.svg";
+        var imageSizeWidth = 100;
+        var imageSizeHeight = 100;
+       }else{
           var homeUrl = "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
           var awayUrl = "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
           var imageSizeWidth = 80;
@@ -248,7 +386,7 @@ document.getElementById("sportSelect").addEventListener("change", function () {
 });
 
 document.getElementById("sportSelect").dispatchEvent(new Event("change"));
-document.getElementById("openIframeBtn").addEventListener("click", function () {
+/*document.getElementById("openIframeBtn").addEventListener("click", function () {
   document.getElementById("iframeContainer").style.display = "block";
   if (sportvalue == "NBA") {
     iframeURL =
@@ -260,7 +398,7 @@ document.getElementById("openIframeBtn").addEventListener("click", function () {
   document.getElementById("myIframe").src = iframeURL;
   document.getElementById("formContainer").style.display = "block";
 });
-
+*/
 document.getElementById("myForm").addEventListener("submit", function (event) {
   event.preventDefault();
   var inputValue = document.getElementById("inputText").value;

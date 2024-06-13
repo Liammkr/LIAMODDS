@@ -6,6 +6,12 @@ function findPlayerId(name) {
         if (sportvalue == "MLB") {
           jsonData = MLBjsonData
         }
+        if (sportvalue == "NHL") {
+            jsonData = NHLjsonData;
+          }
+          if (sportvalue == "WNBA") {
+            jsonData = WNBAjsonData
+          }
         var data = JSON.parse(jsonData);
         var playerName = name;
         var playerId = null;

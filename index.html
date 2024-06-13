@@ -11,9 +11,11 @@
   <meta name="description" content="Liamkr.com | Posotive EV Sports Betting Program">
   <link rel="apple-touch-startup-image" href="https://cdn.glitch.global/4b213ef2-89bf-4106-bbcb-bcc748b52a36/Loading.jpg?v=1711591695393">
   <meta name="apple-mobile-web-app-title" content="Liam Odds">
-  <link rel="stylesheet" href="new.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <div class="container2">
       <img src="https://raw.githubusercontent.com/Liammkr/WSTBET/main/LIAMODDSWHITE.png" alt="Your Image" class="img2">
   </div>
@@ -30,8 +32,8 @@
       <option value="draftkings" selected>DraftKings</option>
       <option value="fanduel">FanDuel</option>
     </select>
-    <button id="openIframeBtn">Refresh PrizePicks</button>
-    <input type="number" id="quantity" name="quantity" max="80" min="1" value="filterBY">
+    <!--<button id="openIframeBtn">Refresh PrizePicks</button>-->
+    <!--<input type="number" id="quantity" name="quantity" max="80" min="1" value="filterBY">-->
   </div>
   <div class="iframe-container" id="iframeContainer">
     <iframe id="myIframe" frameborder="0" width="100%" height="400"></iframe>
