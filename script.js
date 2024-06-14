@@ -129,7 +129,6 @@ function getData(url) {
     });
 }
 firebaseConfig = {
-  apiKey: "AIzaSyB_ve0_tAF3TbkH_sF9i8Td7EltJf_m_e0",
   authDomain: "liamkrodds.firebaseapp.com",
   databaseURL: "https://liamkrodds-default-rtdb.firebaseio.com",
   projectId: "liamkrodds",
