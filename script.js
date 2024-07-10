@@ -63,6 +63,7 @@ var nhlmap = {
   goldenknights: "VGK",
   capitals: "WSH",
   jets: "WPG",
+  club: "UTA"
 }
 var mlbmap = {
   angels: 108,
