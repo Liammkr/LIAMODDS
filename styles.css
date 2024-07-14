@@ -29,6 +29,9 @@ button {
     margin-bottom: 20px;
     margin-top: 20px;
 }
+button:hover {
+  background-color: #555555;
+}
 .section-header {
     border-radius: 5px;
     cursor: pointer;
@@ -272,4 +275,11 @@ input {
     .buttons .more {
       width: 49%;
       font-size: 16px;
+    }
+    
+
+    #logos img {
+      display: center;
+      height: 60px;  
+      width: auto;
     }

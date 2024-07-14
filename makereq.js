@@ -44,12 +44,12 @@ function makeRequest(eventID, bookmaker, sectionContent) {
 
       allOutcomes.sort((a, b) => a.price - b.price);
 
-      formattedHtml += "<div>";
-      formattedHtml += "<h3>API Response:</h3>";
-      formattedHtml += "<p><strong>Event ID:</strong> " + data.id + "</p>";
-      formattedHtml += "<p><strong>Sport:</strong> " + data.sport_title + "</p>";
-      formattedHtml += "<p><strong>Commence Time:</strong> " + data.commence_time + "</p>";
-      formattedHtml += "</div>";
+      //formattedHtml += "<div>";
+      //formattedHtml += "<h3>API Response:</h3>";
+      //formattedHtml += "<p><strong>Event ID:</strong> " + data.id + "</p>";
+      //formattedHtml += "<p><strong>Sport:</strong> " + data.sport_title + "</p>";
+      //formattedHtml += "<p><strong>Commence Time:</strong> " + data.commence_time + "</p>";
+      //formattedHtml += "</div>";
 
       formattedHtml += '<div class="grid-container">';
 

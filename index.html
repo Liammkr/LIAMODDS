@@ -21,17 +21,21 @@
   </div>
   <div class="container3">
     <label for="sportSelect"></label>
-    <select id="sportSelect">
+    <select id="sportSelect" style="display: none;">
       <option value="basketball_nba" selected>NBA</option>
       <option value="baseball_mlb">MLB</option>
       <option value="icehockey_nhl">NHL</option>
       <option value="basketball_wnba" selected>WNBA</option>
     </select>
     <label for="bookmakerSelect"></label>
-    <select id="bookmakerSelect">
+    <select id="bookmakerSelect" style="display: none;">
       <option value="draftkings" selected>DraftKings</option>
       <option value="fanduel">FanDuel</option>
     </select>
+    <button id="logos" onclick="changesprt('basketball_nba')"><img src="NBA.png"></button>
+    <button id="logos" onclick="changesprt('baseball_mlb')"><img src="MLB.png"></button>
+    <button id="logos" onclick="changesprt('icehockey_nhl')"><img src="NHL.png"></button>
+    <button id="logos" onclick="changesprt('basketball_wnba')"><img src="WNBA.png"></button>
     <!--<button id="openIframeBtn">Refresh PrizePicks</button>-->
     <!--<input type="number" id="quantity" name="quantity" max="80" min="1" value="filterBY">-->
   </div>

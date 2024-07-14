@@ -111,6 +111,13 @@ var wnbamap = {
   mercury: 17,
   storm: 28
 }
+function changesprt(sport){
+  val = document.getElementById("sportSelect")
+  val.value = sport
+  var event = new Event("change");
+  val.dispatchEvent(event);
+
+}
 function getData(url) {
   const corsAnywhereUrl = url;
 
