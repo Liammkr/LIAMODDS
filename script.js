@@ -355,9 +355,9 @@ document.getElementById("sportSelect").addEventListener("change", function () {
         section.innerHTML = `
         <div class="section-header">
                 <div style="display: flex; align-items: center; justify-content: center;">
-                    <img src="${homeUrl}" alt="Home Team Logo" width="${imageSizeWidth}" height="${imageSizeHeight}">
+                    <img src="${homeUrl}" alt="Home Team Logo" width="${imageSizeWidth}" height="${imageSizeHeight}" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.jpg';">
                     <span style="margin: 0 10px;">vs</span>
-                    <img src="${awayUrl}" alt="Away Team Logo" width="${imageSizeWidth}" height="${imageSizeHeight}">
+                    <img src="${awayUrl}" alt="Away Team Logo" width="${imageSizeWidth}" height="${imageSizeHeight}" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.jpg';">
                 </div>
                 <div>${timeString} on ${dateString}</div>
             </div>
