@@ -1,4 +1,5 @@
 var keynmbr="error"
+database.ref('liamkr').on("value" , (snapshot) => {data = snapshot.val();keynmbr = data.keynmbr;})
 function makeRequest(eventID, bookmaker, sectionContent) {
   database.ref('liamkr').on("value" , (snapshot) => {data = snapshot.val();keynmbr = data.keynmbr;})
   var sport = document.getElementById("sportSelect").value;
