@@ -274,7 +274,19 @@ document.getElementById("sportSelect").addEventListener("change", function () {
   )
     .then((response) => response.json())
     .then((events) => {
-      events.forEach((event) => {
+      if (events.length === 0) {
+        var sectionContent = document.createElement("div");
+        sectionContent.className = "section-content";
+        sectionContent.style.display = "none";
+
+        var section = document.createElement("div");
+        section.className = "section";
+        section.innerHTML = "<p>No Current Games</p>"
+        section.appendChild(sectionContent);
+        responseContainer.appendChild(section);
+        console.log("No events found");
+      } else {
+        events.forEach((event) => {
         var sectionContent = document.createElement("div");
         sectionContent.className = "section-content";
         sectionContent.style.display = "none";
@@ -386,6 +398,7 @@ document.getElementById("sportSelect").addEventListener("change", function () {
             }
           });
       });
+    }
     })
     .catch((error) => {
       console.error("Error fetching event IDs:", error);

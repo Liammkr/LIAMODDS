@@ -112,7 +112,7 @@ p {
   margin: 0 auto; /* Centers the image horizontally */
   margin-top:10px;
   height: auto;
-  width:40%
+  width:400px
 }
 input {
     background-color: #1E1E1E; /* dark purple */
@@ -280,6 +280,6 @@ input {
 
     #logos img {
       display: center;
-      height: 60px;  
+      height: 80px;  
       width: auto;
     }
