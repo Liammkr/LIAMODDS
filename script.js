@@ -141,26 +141,22 @@ firebaseConfig = {
   databaseURL: "https://liamkrodds-default-rtdb.firebaseio.com",
   projectId: "liamkrodds",
   storageBucket: "liamkrodds.appspot.com",
-  messagingSenderId: "62124083693",
-  appId: "1:62124083693:web:d8650c5ede061bc666bfe4",
-  measurementId: "G-ZLSBRFXPP0"
 };
 firebase.initializeApp(firebaseConfig);
  
 var database = firebase.database();
 
 var data, newdata
-// Read initial data and update status
 /*database
   .ref("liamkr")
   .once("value")
   .then(function (snapshot) {
     data = snapshot.val();
-    console.log(data.apikey); // Do something with the data
+    console.log(data.apikey); 
     getData(data.uploaded_text_url)
     .then(data => {
       NBAjsonData = data;
-      console.log(NBAjsonData); // Do something with the fetched data
+      console.log(NBAjsonData); 
       finditem()
     })
     .catch(error => {
@@ -178,7 +174,7 @@ getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NB
 getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/MLB?alt=media")
     .then(data => {
       MLBjsonData = data;
-      console.log("MLB Loaded")}); // Do something with the fetched data
+      console.log("MLB Loaded")});
 getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NHL?alt=media")
     .then(data => {
       NHLjsonData = data;
@@ -186,23 +182,14 @@ getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NH
 getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/WNBA?alt=media")
     .then(data => {
       WNBAjsonData = data;
-      console.log("WNBA Loaded")}); // Do something with the fetched data
-// Update status whenever there's a change in the database
-var start = {
+      console.log("WNBA Loaded")});
+database.ref("liamkr").update({
   run_script : true
-}
-database.ref("liamkr").update(start);
-
-
-var apiKey = "491f5f92d61bab1c3f4767f31a044794";
+});
+var apiKey = ["491f5f92d61bab1c3f4767f31a044794","1","2","3","4"];
 var result = "error";
 var jsonData = null;
-var MLBjsonData,
-  NBAjsonData,
-  sportvalue,
-  playerName,
-  sortedOutcomes, imageurl,
-  currentLine;
+var MLBjsonData, NBAjsonData, sportvalue, playerName, sortedOutcomes, imageurl, currentLine;
 var filterBY = 50;
 /*if (localStorage.getItem("filter") != null) {
   var filterBY = localStorage.getItem("filter");
@@ -223,7 +210,7 @@ if (localStorage.getItem("sport") != null) {
   var sport = "basketball_nba"
 }
 document.getElementById("sportSelect").value = sport;
-document.getElementById("sportSelect").addEventListener("input", function (event) {
+document.getElementById("sportSelect").addEventListener("change", function (event) {
   localStorage.setItem("sport", document.getElementById("sportSelect").value);
 });
 function hideAllSectionContents() {
@@ -270,7 +257,7 @@ document.getElementById("sportSelect").addEventListener("change", function () {
   responseContainer.innerHTML = "";
 
   fetch(
-    "https://api.the-odds-api.com/v4/sports/" + selectedSport + "/events?apiKey=" + apiKey
+    "https://api.the-odds-api.com/v4/sports/" + selectedSport + "/events?apiKey=" + apiKey[0]
   )
     .then((response) => response.json())
     .then((events) => {
@@ -296,14 +283,13 @@ document.getElementById("sportSelect").addEventListener("change", function () {
         const dateTimeString = event.commence_time;
         const dateTime = new Date(dateTimeString);
 
-        // Extracting the date and time portions
-        const month = dateTime.getMonth() + 1; // Adding 1 because months are zero-based
+
+        const month = dateTime.getMonth() + 1;
         const day = dateTime.getDate();
         let hours = dateTime.getHours();
         const minutes = dateTime.getMinutes();
         const period = hours >= 12 ? "PM" : "AM";
 
-        // Convert hours to 12-hour format
         hours = hours % 12 || 12;
 
         const dateString = `${month}/${day}`;
@@ -424,8 +410,6 @@ document.getElementById("myForm").addEventListener("submit", function (event) {
   var inputValue = document.getElementById("inputText").value;
   console.log("Submitted value:", inputValue);
   jsonData = inputValue;
-  // You can perform further actions with the submitted value here
-  // Close the iframe and hide the form container
   document.getElementById("iframeContainer").style.display = "none";
   document.getElementById("formContainer").style.display = "none";
 });

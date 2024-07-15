@@ -1,4 +1,6 @@
+var keynmbr="error"
 function makeRequest(eventID, bookmaker, sectionContent) {
+  database.ref('liamkr').on("value" , (snapshot) => {data = snapshot.val();keynmbr = data.keynmbr;})
   var sport = document.getElementById("sportSelect").value;
   var markets = "";
 
@@ -16,7 +18,7 @@ function makeRequest(eventID, bookmaker, sectionContent) {
       "/events/" +
       eventID +
       "/odds?apiKey=" +
-      apiKey +
+      apiKey[keynmbr] +
       "&bookmakers=" +
       bookmaker +
       "&markets=" +
@@ -133,5 +135,10 @@ function makeRequest(eventID, bookmaker, sectionContent) {
     .catch((error) => {
       console.error("Error fetching odds data:", error);
       sectionContent.innerHTML = "<p>Error fetching odds data</p>";
+      if(keynmbr < (apiKey.length)-1){
+        firebase.database().ref('liamkr/keynmbr').set((keynmbr+1));
+      } else {
+        firebase.database().ref('liamkr/keynmbr').set(0);
+      }
     });
 }
