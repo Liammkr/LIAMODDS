@@ -283,6 +283,10 @@ input {
       height: 80px;  
       width: auto;
     }
+    .sectionimg {
+      width: 100px;
+      height: 100px;
+    }
 
     @media only screen and (max-width: 600px) {
       body {
@@ -424,7 +428,8 @@ input {
     .section {
         flex: 0 0 auto;
         margin: 10px;
-        width: 300px; /* Adjust as needed */
+        width: 150px; /* Adjust as needed */
+        font-size: 10px;
     }
     ::placeholder {
         color: white;
@@ -491,82 +496,87 @@ input {
         /* This will ensure the image scales to fit the container */
     }
     .grid-container {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-          gap: 20px;
-          padding: 20px;
-        }
-        .card {
-          background-color: #1E1E1E;
-          border-radius: 10px;
-          padding: 20px;
-          width: 350px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          display: flex;
-          align-items: center;
-          font-size: 14px;
-        }
-        .card img {
-          width: 120px;
-          height: 120px;
-          margin-right: 20px;
-        }
-        .info {
-          flex: 1;
-        }
-        .player-info {
-          text-align: center;
-          font-size: 17px;
-          margin-bottom: 10px;
-          line-height: 1.4;
-        }
-        .player-info div:nth-child(1) {
-          color: #FFFFFF;
-        }
-        .points {
-          text-align: center;
-          font-size: 36px;
-          font-weight: bold;
-        }
-        .points span {
-          font-size: 18px;
-          color: #AAAAAA;
-        }
-        .buttons {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 20px;
-          font-size: 14px;
-        }
-        .buttons button {
-          background-color: #2E2E2E;
-          border: none;
-          padding: 10px 20px;
-          color: white;
-          border-radius: 5px;
-          cursor: pointer;
-        }
-        .buttons button:hover {
-          background-color: #555555;
-        }
-        .buttons .less {
-          width: 49%;
-          font-size: 16px;
-        }
-        .buttons .right {
-          background-color: #9b59b6;
-          width: 49%;
-          font-size: 16px;
-        }
-        .buttons .more {
-          width: 49%;
-          font-size: 16px;
-        }
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); /* 50% of 350px */
+      gap: 10px; /* 50% of 20px */
+      padding: 10px; /* 50% of 20px */
+    }
+    .card {
+      background-color: #1E1E1E;
+      border-radius: 5px; /* 50% of 10px */
+      padding: 10px; /* 50% of 20px */
+      width: 175px; /* 50% of 350px */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 50% of 0 4px 8px */
+      display: flex;
+      align-items: center;
+      font-size: 7px; /* 50% of 14px */
+    }
+    .card img {
+      width: 60px; /* 50% of 120px */
+      height: 60px; /* 50% of 120px */
+      margin-right: 10px; /* 50% of 20px */
+    }
+    .info {
+      flex: 1;
+    }
+    .player-info {
+      text-align: center;
+      font-size: 8.5px; /* 50% of 17px */
+      margin-bottom: 5px; /* 50% of 10px */
+      line-height: 1.4;
+    }
+    .player-info div:nth-child(1) {
+      color: #FFFFFF;
+    }
+    .points {
+      text-align: center;
+      font-size: 18px; /* 50% of 36px */
+      font-weight: bold;
+    }
+    .points span {
+      font-size: 9px; /* 50% of 18px */
+      color: #AAAAAA;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px; /* 50% of 20px */
+      font-size: 7px; /* 50% of 14px */
+    }
+    .buttons button {
+      background-color: #2E2E2E;
+      border: none;
+      padding: 5px 10px; /* 50% of 10px 20px */
+      color: white;
+      border-radius: 2.5px; /* 50% of 5px */
+      cursor: pointer;
+    }
+    .buttons button:hover {
+      background-color: #555555;
+    }
+    .buttons .less {
+      width: 49%; /* 50% of 49% */
+      font-size: 8px; /* 50% of 16px */
+    }
+    .buttons .right {
+      background-color: #9b59b6;
+      width: 49%; /* 50% of 49% */
+      font-size: 8px; /* 50% of 16px */
+    }
+    .buttons .more {
+      width: 49%; /* 50% of 49% */
+      font-size: 8px; /* 50% of 16px */
+    }
+    
         
     
         #logos img {
           display: center;
-          height: 60px;  
+          height: 30px;  
           width: auto;
+        }
+        .sectionimg {
+          width: 50px;
+          height: 50px;
         }
   }
