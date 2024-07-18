@@ -232,7 +232,11 @@ if (localStorage.getItem("emailsent") != "emailrecieved") {
   </div>      
 </div>`
 }
-}); 
+});
+function scrollToDiv() {
+  var targetDiv = document.getElementById('fullscreen');
+  targetDiv.scrollIntoView({ behavior: 'smooth' });
+} 
 function closebtn(){
   //localStorage.setItem("emailsent", "emailrecieved");
   document.getElementById("notis").remove()
