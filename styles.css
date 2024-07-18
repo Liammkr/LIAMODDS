@@ -658,6 +658,8 @@ input {
           position: fixed;
           bottom: 0;
           padding: 20px; /* Add some padding from the bottom */
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;    
         }
         .close-btn {
           position: absolute;
