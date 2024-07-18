@@ -1,4 +1,9 @@
+var keynmbr="error"
+var numofprops = 0
+database.ref('liamkr').on("value" , (snapshot) => {data = snapshot.val();keynmbr = data.keynmbr;})
 function makeRequest(eventID, bookmaker, sectionContent) {
+  numofprops = 0
+  database.ref('liamkr').on("value" , (snapshot) => {data = snapshot.val();keynmbr = data.keynmbr;})
   var sport = document.getElementById("sportSelect").value;
   var markets = "";
 
@@ -16,7 +21,7 @@ function makeRequest(eventID, bookmaker, sectionContent) {
       "/events/" +
       eventID +
       "/odds?apiKey=" +
-      apiKey +
+      apiKey[keynmbr] +
       "&bookmakers=" +
       bookmaker +
       "&markets=" +
@@ -101,6 +106,7 @@ function makeRequest(eventID, bookmaker, sectionContent) {
                 </div>
               </div>
             `;
+            numofprops +=1
           }
           if(outcome.name == "Over"){
             var marketInfo = ` (${formattedMarketName})`;
@@ -121,17 +127,28 @@ function makeRequest(eventID, bookmaker, sectionContent) {
                 </div>
               </div>
             `;
+            numofprops +=1
           }
         }
       });
 
       formattedHtml += '</div>';
-
+      if(numofprops > 0){
+        scrollToDiv()
+      } else{
+        formattedHtml = "<p style='padding-bottom:20px'>No Current Props Found For This Game</p>"
+      }
       var enteredthing = document.getElementById("fullscreen");
       enteredthing.innerHTML = formattedHtml;
+      
     })
     .catch((error) => {
       console.error("Error fetching odds data:", error);
       sectionContent.innerHTML = "<p>Error fetching odds data</p>";
+      if(keynmbr < (apiKey.length)-1){
+        firebase.database().ref('liamkr/keynmbr').set((keynmbr+1));
+      } else {
+        firebase.database().ref('liamkr/keynmbr').set(0);
+      }
     });
 }

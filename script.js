@@ -116,6 +116,8 @@ function changesprt(sport){
   val.value = sport
   var event = new Event("change");
   val.dispatchEvent(event);
+  cntr = document.getElementById("fullscreen")
+  cntr.innerHTML = ""
 
 }
 function getData(url) {
@@ -141,26 +143,22 @@ firebaseConfig = {
   databaseURL: "https://liamkrodds-default-rtdb.firebaseio.com",
   projectId: "liamkrodds",
   storageBucket: "liamkrodds.appspot.com",
-  messagingSenderId: "62124083693",
-  appId: "1:62124083693:web:d8650c5ede061bc666bfe4",
-  measurementId: "G-ZLSBRFXPP0"
 };
 firebase.initializeApp(firebaseConfig);
  
 var database = firebase.database();
 
 var data, newdata
-// Read initial data and update status
 /*database
   .ref("liamkr")
   .once("value")
   .then(function (snapshot) {
     data = snapshot.val();
-    console.log(data.apikey); // Do something with the data
+    console.log(data.apikey); 
     getData(data.uploaded_text_url)
     .then(data => {
       NBAjsonData = data;
-      console.log(NBAjsonData); // Do something with the fetched data
+      console.log(NBAjsonData); 
       finditem()
     })
     .catch(error => {
@@ -178,7 +176,7 @@ getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NB
 getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/MLB?alt=media")
     .then(data => {
       MLBjsonData = data;
-      console.log("MLB Loaded")}); // Do something with the fetched data
+      console.log("MLB Loaded")});
 getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NHL?alt=media")
     .then(data => {
       NHLjsonData = data;
@@ -186,35 +184,63 @@ getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NH
 getData("https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/WNBA?alt=media")
     .then(data => {
       WNBAjsonData = data;
-      console.log("WNBA Loaded")}); // Do something with the fetched data
-// Update status whenever there's a change in the database
-var start = {
+      console.log("WNBA Loaded")});
+database.ref("liamkr").update({
   run_script : true
-}
-database.ref("liamkr").update(start);
-
-
-var apiKey = "491f5f92d61bab1c3f4767f31a044794";
+});
+var apiKey = ["491f5f92d61bab1c3f4767f31a044794","d9c1921d37a313c158ec26608448298e","351c3f3fd620edf8816d9eb8dc87e087","6448326aff8a17d51e863ae0915aa93e"];
 var result = "error";
 var jsonData = null;
-var MLBjsonData,
-  NBAjsonData,
-  sportvalue,
-  playerName,
-  sortedOutcomes, imageurl,
-  currentLine;
+var MLBjsonData, NBAjsonData, sportvalue, playerName, sortedOutcomes, imageurl, currentLine;
 var filterBY = 50;
-/*if (localStorage.getItem("filter") != null) {
-  var filterBY = localStorage.getItem("filter");
-} else {
-  localStorage.setItem("filter", 50);
-  var filterBY = 50
-}
-document.getElementById("quantity").value = filterBY;
-document.getElementById("quantity").addEventListener("input", function (event) {
-  localStorage.setItem("filter", document.getElementById("quantity").value);
-});*/
+var emailsRef = database.ref('liamkr/emails'); // 'emails' is the name of the node in your database
 
+// Function to add an email to the database
+// Function to add an email to the database if it doesn't already exist
+function addEmailIfNotExists(email) {
+  // Check if the email already exists
+  emailsRef.orderByChild('email').equalTo(email).once('value', function(snapshot) {
+    if (snapshot.exists()) {
+      console.log("Email already exists:", email);
+    } else {
+      // Add the email if it doesn't exist
+      emailsRef.push().set({
+        email: email
+      }).then(function() {
+        console.log("Email added successfully");
+        localStorage.setItem("emailsent", "emailrecieved");
+        document.getElementById("notis").remove()
+      }).catch(function(error) {
+        console.error("Error adding email: ", error);
+      });
+    }
+  }).catch(function(error) {
+    console.error("Error checking email existence: ", error);
+  });
+}
+
+// Example usage
+window.addEventListener("load", (event) => {
+if (localStorage.getItem("emailsent") != "emailrecieved") {
+  document.getElementById("notis").innerHTML = `   <div class="form">
+  <button class="close-btn" onclick="closebtn()">&times;</button>
+  <span class="title">Stay Updated</span>
+  <p class="description">Receive Notifications For When Positive EV Props Appear.</p>
+  <div>
+    <input placeholder="Enter your email" type="email" id="email-address">
+    <button onclick="addEmailIfNotExists(document.getElementById('email-address').value);">Subscribe</button>
+  </div>      
+</div>`
+}
+});
+function scrollToDiv() {
+  var targetDiv = document.getElementById('fullscreen');
+  targetDiv.scrollIntoView({ behavior: 'smooth' });
+} 
+function closebtn(){
+  //localStorage.setItem("emailsent", "emailrecieved");
+  document.getElementById("notis").remove()
+}
 var sport = null;
 if (localStorage.getItem("sport") != null) {
   var sport = localStorage.getItem("sport");
@@ -223,7 +249,7 @@ if (localStorage.getItem("sport") != null) {
   var sport = "basketball_nba"
 }
 document.getElementById("sportSelect").value = sport;
-document.getElementById("sportSelect").addEventListener("input", function (event) {
+document.getElementById("sportSelect").addEventListener("change", function (event) {
   localStorage.setItem("sport", document.getElementById("sportSelect").value);
 });
 function hideAllSectionContents() {
@@ -270,11 +296,23 @@ document.getElementById("sportSelect").addEventListener("change", function () {
   responseContainer.innerHTML = "";
 
   fetch(
-    "https://api.the-odds-api.com/v4/sports/" + selectedSport + "/events?apiKey=" + apiKey
+    "https://api.the-odds-api.com/v4/sports/" + selectedSport + "/events?apiKey=" + apiKey[0]
   )
     .then((response) => response.json())
     .then((events) => {
-      events.forEach((event) => {
+      if (events.length === 0) {
+        var sectionContent = document.createElement("div");
+        sectionContent.className = "section-content";
+        sectionContent.style.display = "none";
+
+        var section = document.createElement("div");
+        section.className = "section";
+        section.innerHTML = "<p>No Current Games</p>"
+        section.appendChild(sectionContent);
+        responseContainer.appendChild(section);
+        console.log("No events found");
+      } else {
+        events.forEach((event) => {
         var sectionContent = document.createElement("div");
         sectionContent.className = "section-content";
         sectionContent.style.display = "none";
@@ -284,14 +322,13 @@ document.getElementById("sportSelect").addEventListener("change", function () {
         const dateTimeString = event.commence_time;
         const dateTime = new Date(dateTimeString);
 
-        // Extracting the date and time portions
-        const month = dateTime.getMonth() + 1; // Adding 1 because months are zero-based
+
+        const month = dateTime.getMonth() + 1;
         const day = dateTime.getDate();
         let hours = dateTime.getHours();
         const minutes = dateTime.getMinutes();
         const period = hours >= 12 ? "PM" : "AM";
 
-        // Convert hours to 12-hour format
         hours = hours % 12 || 12;
 
         const dateString = `${month}/${day}`;
@@ -355,9 +392,9 @@ document.getElementById("sportSelect").addEventListener("change", function () {
         section.innerHTML = `
         <div class="section-header">
                 <div style="display: flex; align-items: center; justify-content: center;">
-                    <img src="${homeUrl}" alt="Home Team Logo" width="${imageSizeWidth}" height="${imageSizeHeight}">
+                    <img src="${homeUrl}" alt="Home Team Logo" class="sectionimg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.jpg';">
                     <span style="margin: 0 10px;">vs</span>
-                    <img src="${awayUrl}" alt="Away Team Logo" width="${imageSizeWidth}" height="${imageSizeHeight}">
+                    <img src="${awayUrl}" alt="Away Team Logo" class="sectionimg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.jpg';">
                 </div>
                 <div>${timeString} on ${dateString}</div>
             </div>
@@ -386,6 +423,7 @@ document.getElementById("sportSelect").addEventListener("change", function () {
             }
           });
       });
+    }
     })
     .catch((error) => {
       console.error("Error fetching event IDs:", error);
@@ -411,8 +449,6 @@ document.getElementById("myForm").addEventListener("submit", function (event) {
   var inputValue = document.getElementById("inputText").value;
   console.log("Submitted value:", inputValue);
   jsonData = inputValue;
-  // You can perform further actions with the submitted value here
-  // Close the iframe and hide the form container
   document.getElementById("iframeContainer").style.display = "none";
   document.getElementById("formContainer").style.display = "none";
 });
