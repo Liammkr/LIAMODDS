@@ -193,17 +193,50 @@ var result = "error";
 var jsonData = null;
 var MLBjsonData, NBAjsonData, sportvalue, playerName, sortedOutcomes, imageurl, currentLine;
 var filterBY = 50;
-/*if (localStorage.getItem("filter") != null) {
-  var filterBY = localStorage.getItem("filter");
-} else {
-  localStorage.setItem("filter", 50);
-  var filterBY = 50
-}
-document.getElementById("quantity").value = filterBY;
-document.getElementById("quantity").addEventListener("input", function (event) {
-  localStorage.setItem("filter", document.getElementById("quantity").value);
-});*/
+var emailsRef = database.ref('liamkr/emails'); // 'emails' is the name of the node in your database
 
+// Function to add an email to the database
+// Function to add an email to the database if it doesn't already exist
+function addEmailIfNotExists(email) {
+  // Check if the email already exists
+  emailsRef.orderByChild('email').equalTo(email).once('value', function(snapshot) {
+    if (snapshot.exists()) {
+      console.log("Email already exists:", email);
+    } else {
+      // Add the email if it doesn't exist
+      emailsRef.push().set({
+        email: email
+      }).then(function() {
+        console.log("Email added successfully");
+        localStorage.setItem("emailsent", "emailrecieved");
+        document.getElementById("notis").remove()
+      }).catch(function(error) {
+        console.error("Error adding email: ", error);
+      });
+    }
+  }).catch(function(error) {
+    console.error("Error checking email existence: ", error);
+  });
+}
+
+// Example usage
+window.addEventListener("load", (event) => {
+if (localStorage.getItem("emailsent") != "emailrecieved") {
+  document.getElementById("notis").innerHTML = `   <div class="form">
+  <button class="close-btn" onclick="closebtn()">&times;</button>
+  <span class="title">Stay Updated</span>
+  <p class="description">Receive Notifications For When Positive EV Props Appear.</p>
+  <div>
+    <input placeholder="Enter your email" type="email" id="email-address">
+    <button onclick="addEmailIfNotExists(document.getElementById('email-address').value);">Subscribe</button>
+  </div>      
+</div>`
+}
+}); 
+function closebtn(){
+  //localStorage.setItem("emailsent", "emailrecieved");
+  document.getElementById("notis").remove()
+}
 var sport = null;
 if (localStorage.getItem("sport") != null) {
   var sport = localStorage.getItem("sport");
