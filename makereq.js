@@ -149,6 +149,7 @@ function makeRequest(eventID, bookmaker, sectionContent) {
       if (numofprops == 0) {
         formattedHtml =
           "<p style='padding-bottom:20px'>No Current Props Found For This Game</p>";
+        sectionContent.innerHTML = "<p>No Current Props</p>";
       }
       var enteredthing = document.getElementById("fullscreen");
       enteredthing.innerHTML = formattedHtml;
