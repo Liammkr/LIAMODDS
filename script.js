@@ -255,7 +255,22 @@ window.addEventListener("load", (event) => {
 });
 function scrollToDiv() {
   var targetDiv = document.getElementById("fullscreen");
+
+  if (!targetDiv) {
+    console.error("Fullscreen element not found.");
+    return;
+  }
+
+  // Scroll the targetDiv into view first
   targetDiv.scrollIntoView({ behavior: "smooth" });
+
+  // Scroll 100px further down after a short delay
+  setTimeout(() => {
+    targetDiv.scrollBy({
+      top: 100,
+      behavior: "smooth",
+    });
+  }, 500); // Adjust delay if needed
 }
 function closebtn() {
   //localStorage.setItem("emailsent", "emailrecieved");

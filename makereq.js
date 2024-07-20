@@ -147,14 +147,14 @@ function makeRequest(eventID, bookmaker, sectionContent) {
       });
 
       formattedHtml += "</div>";
+      var enteredthing = document.getElementById("fullscreen");
+      enteredthing.innerHTML = formattedHtml;
       if (numofprops > 0) {
         scrollToDiv();
       } else {
         formattedHtml =
           "<p style='padding-bottom:20px'>No Current Props Found For This Game</p>";
       }
-      var enteredthing = document.getElementById("fullscreen");
-      enteredthing.innerHTML = formattedHtml;
     })
     .catch((error) => {
       console.error("Error fetching odds data:", error);
