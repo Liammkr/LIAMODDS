@@ -1,62 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liam Odds</title>
-  <link rel="icon" href="https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.jpg" type="image/png">
-  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.png"/>
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#2E2E2E" />
-  <meta name="description" content="Liamkr.com | Posotive EV Sports Betting Program">
-  <link rel="apple-touch-startup-image" href="https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.png">
-  <meta name="apple-mobile-web-app-title" content="Liam Odds">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liam Odds</title>
+    <link
+      rel="icon"
+      href="https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.jpg"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.png"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#2E2E2E" />
+    <meta
+      name="description"
+      content="Liamkr.com | Posotive EV Sports Betting Program"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Liam Odds" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <div class="container2">
-      <img src="https://raw.githubusercontent.com/Liammkr/WSTBET/main/LIAMODDSWHITE.png" alt="Your Image" class="img2">
-  </div>
-  <div class="container3">
-    <label for="sportSelect"></label>
-    <select id="sportSelect" style="display: none;">
-      <option value="basketball_nba" selected>NBA</option>
-      <option value="baseball_mlb">MLB</option>
-      <option value="icehockey_nhl">NHL</option>
-      <option value="basketball_wnba" selected>WNBA</option>
-    </select>
-    <label for="bookmakerSelect"></label>
-    <select id="bookmakerSelect" style="display: none;">
-      <option value="draftkings" selected>DraftKings</option>
-      <option value="fanduel">FanDuel</option>
-    </select>
-    <button id="logos" onclick="changesprt('basketball_nba')"><img src="images/NBA.png"></button>
-    <button id="logos" onclick="changesprt('baseball_mlb')"><img src="images/MLB.png"></button>
-    <button id="logos" onclick="changesprt('icehockey_nhl')"><img src="images/NHL.png"></button>
-    <button id="logos" onclick="changesprt('basketball_wnba')"><img src="images/WNBA.png"></button>
-    <!--<button id="openIframeBtn">Refresh PrizePicks</button>-->
-    <!--<input type="number" id="quantity" name="quantity" max="80" min="1" value="filterBY">-->
-  </div>
-  <div class="iframe-container" id="iframeContainer">
-    <iframe id="myIframe" frameborder="0" width="100%" height="400"></iframe>
-  </div>
-  <div id="formContainer" style="display: none;">
-    <form id="myForm">
-      <input type="text" id="inputText" placeholder="Paste Text">
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-  <button id="back" onClick="javascript:backbutton()" style="display: none;">
-    <span>Back</span>
-  </button>
-  <div id="responseContainer" class="sections-container"></div>
-  <div id="fullscreen"></div>
-  <div id="notis" class="form-container">
-  </div>
-  <script src="script.js"></script>
-  <script src="makereq.js"></script>
-  <script src="findplayerinfo.js"></script>
-</body>
+    <div class="container2">
+      <img
+        src="https://raw.githubusercontent.com/Liammkr/WSTBET/main/LIAMODDSWHITE.png"
+        alt="Your Image"
+        class="img2"
+      />
+    </div>
+    <div class="container3">
+      <label for="sportSelect"></label>
+      <select id="sportSelect" style="display: none">
+        <option value="basketball_nba" selected>NBA</option>
+        <option value="baseball_mlb">MLB</option>
+        <option value="icehockey_nhl">NHL</option>
+        <option value="basketball_wnba" selected>WNBA</option>
+      </select>
+      <label for="bookmakerSelect"></label>
+      <select id="bookmakerSelect" style="display: none">
+        <option value="draftkings" selected>DraftKings</option>
+        <option value="fanduel">FanDuel</option>
+      </select>
+      <button id="logos" onclick="changesprt('basketball_nba')">
+        <img src="images/NBA.png" />
+      </button>
+      <button id="logos" onclick="changesprt('baseball_mlb')">
+        <img src="images/MLB.png" />
+      </button>
+      <button id="logos" onclick="changesprt('icehockey_nhl')">
+        <img src="images/NHL.png" />
+      </button>
+      <button id="logos" onclick="changesprt('basketball_wnba')">
+        <img src="images/WNBA.png" />
+      </button>
+      <!--<button id="openIframeBtn">Refresh PrizePicks</button>-->
+      <!--<input type="number" id="quantity" name="quantity" max="80" min="1" value="filterBY">-->
+    </div>
+    <div class="iframe-container" id="iframeContainer">
+      <iframe id="myIframe" frameborder="0" width="100%" height="400"></iframe>
+    </div>
+    <div id="formContainer" style="display: none">
+      <form id="myForm">
+        <input type="text" id="inputText" placeholder="Paste Text" />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <button id="back" onClick="javascript:backbutton()" style="display: none">
+      <span>Back</span>
+    </button>
+    <div id="responseContainer" class="sections-container"></div>
+    <div id="fullscreen"></div>
+    <div id="notis" class="form-container"></div>
+    <script src="script.js"></script>
+    <script src="makereq.js"></script>
+    <script src="findplayerinfo.js"></script>
+  </body>
 </html>
