@@ -1,16 +1,24 @@
-var keynmbr="error"
-var numofprops = 0
-database.ref('liamkr').on("value" , (snapshot) => {data = snapshot.val();keynmbr = data.keynmbr;})
+var keynmbr = "error";
+var numofprops = 0;
+database.ref("liamkr").on("value", (snapshot) => {
+  data = snapshot.val();
+  keynmbr = data.keynmbr;
+});
 function makeRequest(eventID, bookmaker, sectionContent) {
-  numofprops = 0
-  database.ref('liamkr').on("value" , (snapshot) => {data = snapshot.val();keynmbr = data.keynmbr;})
+  numofprops = 0;
+  database.ref("liamkr").on("value", (snapshot) => {
+    data = snapshot.val();
+    keynmbr = data.keynmbr;
+  });
   var sport = document.getElementById("sportSelect").value;
   var markets = "";
 
   if (sport == "basketball_nba" || sport == "basketball_wnba") {
-    markets = "player_points,player_rebounds,player_assists,player_points_rebounds_assists,player_points_rebounds,player_points_assists,player_rebounds_assists";
+    markets =
+      "player_points,player_rebounds,player_assists,player_points_rebounds_assists,player_points_rebounds,player_points_assists,player_rebounds_assists";
   } else if (sport == "baseball_mlb") {
-    markets = "batter_hits_runs_rbis,batter_runs_scored,batter_strikeouts,batter_total_bases,batter_walks";
+    markets =
+      "batter_hits_runs_rbis,batter_runs_scored,batter_strikeouts,batter_total_bases,batter_walks";
   } else if (sport == "icehockey_nhl") {
     markets = "player_points,player_assists,player_shots_on_goal";
   }
@@ -41,7 +49,7 @@ function makeRequest(eventID, bookmaker, sectionContent) {
               name: outcome.name,
               point: outcome.point,
               price: outcome.price,
-              market: market.key
+              market: market.key,
             });
           });
         });
@@ -65,11 +73,17 @@ function makeRequest(eventID, bookmaker, sectionContent) {
           .join(" ")
           .replace("Player", "");
 */
-        var formattedMarketName = getCategoryName(outcome.market)
-        var oppositeEV = allOutcomes
-          .filter(o => o.description === outcome.description && o.market === outcome.market && o.price !== outcome.price)
-          .map(o => Number((100 / o.price).toFixed(2)))
-          .shift() || 0;
+        var formattedMarketName = getCategoryName(outcome.market);
+        var oppositeEV =
+          allOutcomes
+            .filter(
+              (o) =>
+                o.description === outcome.description &&
+                o.market === outcome.market &&
+                o.price !== outcome.price
+            )
+            .map((o) => Number((100 / o.price).toFixed(2)))
+            .shift() || 0;
 
         var noVIG = Number(
           (
@@ -78,16 +92,16 @@ function makeRequest(eventID, bookmaker, sectionContent) {
             100
           ).toFixed(2)
         );
-        if(noVIG == 100){
-          noVIG = 50
-          oppositeEV = 50
+        if (noVIG == 100) {
+          noVIG = 50;
+          oppositeEV = 50;
         }
         var inforeq = findPlayerId(outcome.description);
         var idnumbr = inforeq.id;
         var onPrizePicksCheck = findstats(idnumbr, outcome.market);
 
         if (noVIG > filterBY && onPrizePicksCheck == outcome.point) {
-          if(outcome.name == "Under"){
+          if (outcome.name == "Under") {
             var marketInfo = ` (${formattedMarketName})`;
             formattedHtml += `
               <div class="card">
@@ -106,9 +120,9 @@ function makeRequest(eventID, bookmaker, sectionContent) {
                 </div>
               </div>
             `;
-            numofprops +=1
+            numofprops += 1;
           }
-          if(outcome.name == "Over"){
+          if (outcome.name == "Over") {
             var marketInfo = ` (${formattedMarketName})`;
             formattedHtml += `
               <div class="card">
@@ -127,28 +141,32 @@ function makeRequest(eventID, bookmaker, sectionContent) {
                 </div>
               </div>
             `;
-            numofprops +=1
+            numofprops += 1;
           }
         }
       });
-
-      formattedHtml += '</div>';
-      if(numofprops > 0){
-        scrollToDiv()
-      } else{
-        formattedHtml = "<p style='padding-bottom:20px'>No Current Props Found For This Game</p>"
+      formattedHtml += "</div>";
+      if (numofprops == 0) {
+        formattedHtml =
+          "<p style='padding-bottom:20px'>No Current Props Found For This Game</p>";
+        sectionContent.innerHTML = "<p>No Current Props</p>";
       }
       var enteredthing = document.getElementById("fullscreen");
       enteredthing.innerHTML = formattedHtml;
-      
+      if (numofprops > 0) {
+        scrollToDiv();
+      }
     })
     .catch((error) => {
       console.error("Error fetching odds data:", error);
       sectionContent.innerHTML = "<p>Error fetching odds data</p>";
-      if(keynmbr < (apiKey.length)-1){
-        firebase.database().ref('liamkr/keynmbr').set((keynmbr+1));
+      if (keynmbr < apiKey.length - 1) {
+        firebase
+          .database()
+          .ref("liamkr/keynmbr")
+          .set(keynmbr + 1);
       } else {
-        firebase.database().ref('liamkr/keynmbr').set(0);
+        firebase.database().ref("liamkr/keynmbr").set(0);
       }
     });
 }
