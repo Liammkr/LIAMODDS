@@ -74,7 +74,7 @@ def upload_text_to_firebase(text_content, sport):
     text_bytes = text_content.encode('utf-8')
 
     # Upload text content to Firebase Storage
-    blob.upload_from_string(text_bytes, content_type='json')
+    blob.upload_from_string(text_bytes, content_type='text/plain')
 
     print(f"Text content for {sport} uploaded to Firebase Storage")
 
