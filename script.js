@@ -192,9 +192,9 @@ getData(
   WNBAjsonData = data;
   console.log("WNBA Loaded");
 });
-database.ref("liamkr").update({
+/*database.ref("liamkr").update({
   run_script: true,
-});
+});*/
 var apiKey = [
   "491f5f92d61bab1c3f4767f31a044794",
   "d9c1921d37a313c158ec26608448298e",

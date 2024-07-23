@@ -16,9 +16,9 @@ function novig(odd1, odd2) {
 
   return noVigPercentage1.toFixed(2);
 }
-database.ref("liamkr").on("value", (snapshot) => {
+database.ref("liamkr/keynmbr").on("value", (snapshot) => {
   data = snapshot.val();
-  keynmbr = data.keynmbr;
+  keynmbr = data;
 });
 function makeRequest(eventID, bookmaker, sectionContent) {
   numofprops = 0;
