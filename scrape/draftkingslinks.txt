@@ -1,0 +1,9 @@
+MLB
+    total bases: https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/743/subcategories/6607?format=json
+    Pitcher outs: https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031/subcategories/9883?format=json
+    Runs: https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/743/subcategories/7979?format=json
+    Earned Runs Allowed: https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031/subcategories/15220?format=json
+    Hits Allowed: https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031/subcategories/9886?format=json
+    Walks Allowed: https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031/subcategories/15219?format=json
+    Hits + Runs + Rbis: https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/743/subcategories/12149?format=json
+    Strikeouts Thrown: https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031?format=json

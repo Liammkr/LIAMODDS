@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Player Loader</title>
+  </head>
+  <body>
+    <script>
+      const h = (e) => (e < 0 ? (-1 * e) / (-1 * e + 100) : 100 / (e + 100));
+      const u = (e) =>
+        e <= 0.5 ? ((1 - e) / e) * 100 : -((e / (1 - e)) * 100);
+
+      function novig(odd1, odd2) {
+        const americanOdds1 = isNaN(odd1) ? 0 : parseFloat(odd1);
+        const americanOdds2 = isNaN(odd2) ? 0 : parseFloat(odd2);
+
+        const odds1Percentage = h(americanOdds1);
+        const odds2Percentage = h(americanOdds2);
+
+        const totalPercentage = odds1Percentage + odds2Percentage;
+
+        const noVigPercentage1 = (odds1Percentage / totalPercentage) * 100;
+
+        return noVigPercentage1.toFixed(2);
+      }
+
+      async function getData(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+
+        const json = await response.json();
+        return json;
+      }
+
+      async function proxyurl(targetUrl) {
+        const uniqueUrl = `${targetUrl}?t=${new Date().getTime()}`;
+        const corsProxy = "https://corsproxy.io/?";
+        const proxiedUrl = corsProxy + uniqueUrl;
+        const response = await fetch(proxiedUrl);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        return data;
+      }
+
+      function findstats(id, market) {
+        var prop = null;
+        for (var i = 0; i < prizepicksdata.data.length; i++) {
+          var item = prizepicksdata.data[i];
+          if (
+            item.relationships.new_player.data.id === id &&
+            item.attributes.stat_type === market &&
+            item.attributes.odds_type == "standard"
+          ) {
+            prop = item.attributes.line_score;
+            break;
+          }
+        }
+        if (prop !== null) {
+          return prop;
+        } else {
+          return "Game Started / Error";
+        }
+      }
+
+      function findPlayerId(name) {
+        var playerName = name;
+        var playerId = null;
+        var imageurl = null;
+        var returnmsg = null;
+        for (var i = 0; i < prizepicksdata.included.length; i++) {
+          var item = prizepicksdata.included[i];
+          if (
+            item.type === "new_player" &&
+            item.attributes.display_name === playerName
+          ) {
+            playerId = item.id;
+            imageurl = item.attributes.image_url;
+            returnmsg = { id: playerId, url: imageurl };
+            break;
+          }
+        }
+        if (playerId !== null) {
+          return returnmsg;
+        } else {
+          return "error";
+          console.log("error");
+        }
+      }
+
+      function americanToImpliedProbability(odds) {
+        let probability;
+        const numericOdds = parseInt(odds);
+        if (numericOdds > 0) {
+          probability = (100 / (numericOdds + 100)) * 100;
+        } else {
+          probability = (-numericOdds / (-numericOdds + 100)) * 100;
+        }
+        return parseFloat(probability.toFixed(2));
+      }
+
+      var props = { props: [] };
+      var counter = 0;
+
+      async function loadData(path1, path2, subname, url) {
+        try {
+          const data = await proxyurl(url);
+          if (!data) {
+            throw new Error("Failed to fetch or parse JSON data");
+          }
+
+          //console.log("Data from DraftKings:", data);
+
+          const PrizePicks = await getData(
+            "https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/MLB?alt=media"
+          );
+          prizepicksdata = PrizePicks;
+
+          //console.log("PrizePicks Data:", prizepicksdata);
+
+          const offpath =
+            data.eventGroup.offerCategories[path1].offerSubcategoryDescriptors[
+              path2
+            ].offerSubcategory.offers;
+
+          //console.log("Offers Path:", offpath);
+
+          for (let a = 0; a < offpath.length; a++) {
+            for (let i = 0; i < offpath[a].length; i++) {
+              const idandurl = findPlayerId(offpath[a][i].playerNameIdentifier);
+              const playerinfo = findstats(idandurl.id, subname);
+              //console.log(playerinfo);
+              counter++;
+              if (offpath[a][i].outcomes.length == 2) {
+                if (playerinfo == offpath[a][i].outcomes[0].line) {
+                  const over = novig(
+                    Number(offpath[a][i].outcomes[0].oddsAmerican),
+                    Number(offpath[a][i].outcomes[1].oddsAmerican)
+                  );
+                  const under = novig(
+                    Number(offpath[a][i].outcomes[1].oddsAmerican),
+                    Number(offpath[a][i].outcomes[0].oddsAmerican)
+                  );
+
+                  let playerData = {
+                    name: offpath[a][i].playerNameIdentifier,
+                    over: over,
+                    under: under,
+                    line: offpath[a][i].outcomes[0].line,
+                    market: subname,
+                    url: idandurl.url,
+                    oddsover: offpath[a][i].outcomes[0].oddsAmerican,
+                    oddsunder: offpath[a][i].outcomes[1].oddsAmerican,
+                  };
+
+                  props.props.push(playerData);
+                }
+              }
+            }
+          }
+        } catch (error) {
+          console.error("Error in loadData:", error);
+        }
+      }
+
+      async function loadAllData() {
+        await loadData(
+          1,
+          8,
+          "Total Bases",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/743/subcategories/6607?format=json"
+        );
+        //console.log("finished load");
+        await loadData(
+          2,
+          3,
+          "Pitching Outs",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031/subcategories/9883?format=json"
+        );
+        //console.log("finished load");
+        await loadData(
+          1,
+          13,
+          "Runs",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/743/subcategories/7979?format=json"
+        );
+        //console.log("finished load");
+        await loadData(
+          2,
+          7,
+          "Earned Runs Allowed",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031/subcategories/15220?format=json"
+        );
+        //console.log("finished load");
+        await loadData(
+          2,
+          5,
+          "Hits Allowed",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031/subcategories/9886?format=json"
+        );
+        //console.log("finished load");
+        await loadData(
+          2,
+          8,
+          "Walks Allowed",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031/subcategories/15219?format=json"
+        );
+        //console.log("finished load");
+        await loadData(
+          1,
+          7,
+          "Hits+Runs+RBIs",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/743/subcategories/12149?format=json"
+        );
+        //console.log("finished load");
+        await loadData(
+          2,
+          0,
+          "Pitcher Strikeouts",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/1031?format=json"
+        );
+        //console.log("finished load");
+        await loadData(
+          1,
+          4,
+          "Hits",
+          "https://sportsbook-nash.draftkings.com/sites/US-SB/api/v5/eventgroups/84240/categories/743/subcategories/6719?format=json"
+        );
+        //console.log("finished load");
+        console.log(props);
+      }
+
+      loadAllData();
+    </script>
+  </body>
+</html>

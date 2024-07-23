@@ -1,0 +1,799 @@
+obj = {
+    "props": [
+        {
+            "name": "Trea Turner",
+            "over": "48.99",
+            "under": "51.01",
+            "line": 1.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Trea_Turner_67dc86a1-cc03-41ae-ba7d-e5b8434c83e8.webp",
+            "oddsover": "-110",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Korey Lee",
+            "over": "52.46",
+            "under": "47.54",
+            "line": 0.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Korey_Lee_ac61f5ab-a255-4519-95b4-012985867e4f.webp",
+            "oddsover": "-130",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Ceddanne Rafaela",
+            "over": "52.46",
+            "under": "47.54",
+            "line": 1.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Ceddanne_Rafaela_13cfa837-07b4-421a-8ea9-cd9e921adacd.webp",
+            "oddsover": "-130",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Ezequiel Tovar",
+            "over": "48.99",
+            "under": "51.01",
+            "line": 1.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Ezequiel_Tovar_9f9b67ad-6d80-408a-bf23-4ff1dbd8e999.webp",
+            "oddsover": "-110",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Rafael Devers",
+            "over": "53.47",
+            "under": "46.53",
+            "line": 1.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Third_Base_fe966998-15e1-4022-89d5-6b4750516176.webp",
+            "oddsover": "-135",
+            "oddsunder": "+100"
+        },
+        {
+            "name": "Max Schuemann",
+            "over": "50.00",
+            "under": "50.00",
+            "line": 0.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "-115",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Seth Brown",
+            "over": "51.47",
+            "under": "48.53",
+            "line": 0.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Seth_Brown_757fddfc-e76b-4634-b1b2-7d34436013ee.webp",
+            "oddsover": "-125",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Yainer Diaz",
+            "over": "47.54",
+            "under": "52.46",
+            "line": 1.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Yainer_Diaz_ca2dd733-f69d-481c-bffe-78219a34df21.webp",
+            "oddsover": "-105",
+            "oddsunder": "-130"
+        },
+        {
+            "name": "Zack Gelof",
+            "over": "51.47",
+            "under": "48.53",
+            "line": 0.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "-125",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Jo Adell",
+            "over": "50.00",
+            "under": "50.00",
+            "line": 0.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Jo_Adell_5a7981d3-6965-486b-a5e1-68fa257789be.webp",
+            "oddsover": "-115",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Gavin Lux",
+            "over": "50.00",
+            "under": "50.00",
+            "line": 0.5,
+            "market": "Total Bases",
+            "url": "https://static.prizepicks.com/images/players/mlb/Second_Base_bee1e3eb-c746-40c1-a129-e487e27312de.webp",
+            "oddsover": "-115",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Hunter Greene",
+            "over": "51.47",
+            "under": "48.53",
+            "line": 17.5,
+            "market": "Pitching Outs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Hunter_Greene_7abdea2a-e3d9-4458-a044-0b6d989065cd.webp",
+            "oddsover": "-125",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Erick Fedde",
+            "over": "51.01",
+            "under": "48.99",
+            "line": 16.5,
+            "market": "Pitching Outs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Erick_Fedde_b484880b-790e-45a7-a751-2a03c01ec7ea.webp",
+            "oddsover": "-120",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Yilber Diaz",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 15.5,
+            "market": "Pitching Outs",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Spencer Arrighetti",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 16.5,
+            "market": "Pitching Outs",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Bryce Harper",
+            "over": "46.53",
+            "under": "53.47",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Bryce_Harper_f3caeac6-343a-4a01-b5a3-85c5485c57cb.webp",
+            "oddsover": "+100",
+            "oddsunder": "-135"
+        },
+        {
+            "name": "Kyle Schwarber",
+            "over": "52.46",
+            "under": "47.54",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Kyle_Schwarber_c3d9c2d5-8100-409b-a7ea-d5bf7931fc14.webp",
+            "oddsover": "-130",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Seiya Suzuki",
+            "over": "46.53",
+            "under": "53.47",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Seiya_Suzuki_aa691806-f8a0-4dc7-b833-94e59dc22a34.webp",
+            "oddsover": "+100",
+            "oddsunder": "-135"
+        },
+        {
+            "name": "Ceddanne Rafaela",
+            "over": "52.46",
+            "under": "47.54",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Ceddanne_Rafaela_13cfa837-07b4-421a-8ea9-cd9e921adacd.webp",
+            "oddsover": "-130",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Masataka Yoshida",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Masataka_Yoshida_6de34681-ea14-4946-a3de-26053e746465.webp",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Alex Bregman",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Alex_Bregman_7229d580-9405-4d8b-b582-0980dbb2a46a.webp",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Jose Altuve",
+            "over": "50.00",
+            "under": "50.00",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Second_Base_1616381c-d6ac-40b1-8c3f-c70d51bda098.webp",
+            "oddsover": "-115",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Yordan Alvarez",
+            "over": "50.00",
+            "under": "50.00",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Yordan_Alvarez_fdc9c3af-4ad2-43b1-8537-10732d013ed8.webp",
+            "oddsover": "-115",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Shohei Ohtani",
+            "over": "51.47",
+            "under": "48.53",
+            "line": 0.5,
+            "market": "Runs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Shohei_Ohtani_80de60c9-74e3-4a50-b128-b3dc7456a254.webp",
+            "oddsover": "-125",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Erick Fedde",
+            "over": "46.53",
+            "under": "53.47",
+            "line": 2.5,
+            "market": "Earned Runs Allowed",
+            "url": "https://static.prizepicks.com/images/players/mlb/Erick_Fedde_b484880b-790e-45a7-a751-2a03c01ec7ea.webp",
+            "oddsover": "+100",
+            "oddsunder": "-135"
+        },
+        {
+            "name": "Yilber Diaz",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 2.5,
+            "market": "Earned Runs Allowed",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Hogan Harris",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 5.5,
+            "market": "Hits Allowed",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Austin Gomber",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 1.5,
+            "market": "Walks Allowed",
+            "url": "https://static.prizepicks.com/images/players/mlb/Austin_Gomber_f27bbbb3-40ab-4ade-b6ec-355b9499da40.webp",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Blake Snell",
+            "over": "52.46",
+            "under": "47.54",
+            "line": 2.5,
+            "market": "Walks Allowed",
+            "url": "https://static.prizepicks.com/images/players/mlb/Blake_Snell_1a191c8a-25d8-4c89-8f54-5817cc666a64.webp",
+            "oddsover": "-130",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Austin Riley",
+            "over": "50.00",
+            "under": "50.00",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Austin_Riley_4ee9e14f-2436-4ca4-a9c2-6557d8d86769.webp",
+            "oddsover": "-115",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Elly De La Cruz",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Elly_De_La_Cruz_457e0d34-698f-4ee3-ba0e-4bf703200d8f.webp",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Jeimer Candelario",
+            "over": "48.99",
+            "under": "51.01",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Jeimer_Candelario_e295bee0-2f17-42ec-8950-cda202aa9c72.webp",
+            "oddsover": "-110",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Jonathan India",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Jonathan_India_68a3f6f5-5bc0-4048-acc7-f9cda1545f0b.webp",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Spencer Steer",
+            "over": "51.47",
+            "under": "48.53",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Spencer_Steer_22bcbdc8-1a8c-4dea-8794-b17c88c7b8b9.webp",
+            "oddsover": "-125",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Tyler Stephenson",
+            "over": "50.00",
+            "under": "50.00",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Tyler_Stephenson_d9913442-0879-466c-926a-843188b66f89.webp",
+            "oddsover": "-115",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Will Benson",
+            "over": "47.97",
+            "under": "52.03",
+            "line": 0.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Will_Benson_0a7c5ebf-489c-4a98-b468-d443f21bf1e0.webp",
+            "oddsover": "-105",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Brooks Lee",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Bryson Stott",
+            "over": "46.53",
+            "under": "53.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Bryson_Stott_b563181c-665a-42d7-b628-596bae2fe192.webp",
+            "oddsover": "+100",
+            "oddsunder": "-135"
+        },
+        {
+            "name": "Carlos Santana",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Carlos_Santana_86167542-e9cf-4d20-8022-7ed53dc09d0a.webp",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "J.T. Realmuto",
+            "over": "51.47",
+            "under": "48.53",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/J.T._Realmuto_f2a70df3-0bff-48e3-92ae-970c2a103fcf.webp",
+            "oddsover": "-125",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Kyle Schwarber",
+            "over": "53.47",
+            "under": "46.53",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Kyle_Schwarber_c3d9c2d5-8100-409b-a7ea-d5bf7931fc14.webp",
+            "oddsover": "-135",
+            "oddsunder": "+100"
+        },
+        {
+            "name": "Nick Castellanos",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Nick_Castellanos_169ed0b1-e34b-4f4b-925b-f3288f24a5e7.webp",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Ryan Jeffers",
+            "over": "50.49",
+            "under": "49.51",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Ryan_Jeffers_005c0339-91b9-4b00-a373-105e761382eb.webp",
+            "oddsover": "-120",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Willi Castro",
+            "over": "52.46",
+            "under": "47.54",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Willi_Castro_3c273dc1-e828-48d3-bf04-1f26cbee97ac.webp",
+            "oddsover": "-130",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Andrew Benintendi",
+            "over": "47.97",
+            "under": "52.03",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Andrew_Benintendi_0e5244cd-9226-4ee1-bb63-d022a9240ca0.webp",
+            "oddsover": "-105",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Andrew Vaughn",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Andrew_Vaughn_60cf6995-e2a5-47d7-834a-d25cdbdf7f3e.webp",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Wyatt Langford",
+            "over": "51.01",
+            "under": "48.99",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Wyatt_Langford_e49ab48f-3e58-4ac5-99a3-087a0b17b14b.webp",
+            "oddsover": "-120",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Jackson Chourio",
+            "over": "53.47",
+            "under": "46.53",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Jackson_Chourio_87128c5c-da3c-4fe6-9f04-83d6f8dc1302.webp",
+            "oddsover": "-135",
+            "oddsunder": "+100"
+        },
+        {
+            "name": "Joey Ortiz",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Joey_Ortiz_93c07f1f-40bf-49dc-8176-5448d57ad9dc.webp",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Rhys Hoskins",
+            "over": "47.54",
+            "under": "52.46",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/First_Base_171b88ff-8043-4895-9e37-cc550071816e.webp",
+            "oddsover": "-105",
+            "oddsunder": "-130"
+        },
+        {
+            "name": "Bobby Witt Jr.",
+            "over": "46.53",
+            "under": "53.47",
+            "line": 2.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Bobby_Witt_Jr._0f20f69e-28c9-4fb4-8b1e-cde154780682.webp",
+            "oddsover": "+100",
+            "oddsunder": "-135"
+        },
+        {
+            "name": "Gabriel Moreno",
+            "over": "51.01",
+            "under": "48.99",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Gabriel_Moreno_47bbd747-6edc-4d0e-a976-5228f5003fbd.webp",
+            "oddsover": "-120",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Hunter Renfroe",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Hunter_Renfroe_89bab4bd-0fb6-41a6-88d6-0fd6307ae072.webp",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Lourdes Gurriel Jr.",
+            "over": "51.47",
+            "under": "48.53",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Lourdes_Gurriel_20e7bd6e-fb56-4e86-ad2d-b50bc5477371.webp",
+            "oddsover": "-125",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Maikel Garcia",
+            "over": "48.99",
+            "under": "51.01",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Maikel_Garcia_3c07814a-966e-4358-82f5-f59c32af8c94.webp",
+            "oddsover": "-110",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Connor Wong",
+            "over": "49.51",
+            "under": "50.49",
+            "line": 2.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Connor_Wong_dc90f6e6-0e5d-4272-8070-9cd82ee97959.webp",
+            "oddsover": "-115",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Jake Cave",
+            "over": "51.47",
+            "under": "48.53",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Jake_Cave_481ff280-9711-494a-9772-6a012b3899fe.webp",
+            "oddsover": "-125",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Jarren Duran",
+            "over": "53.47",
+            "under": "46.53",
+            "line": 2.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Jarren_Duran_b8124420-b124-4e28-a719-c7a124917735.webp",
+            "oddsover": "-135",
+            "oddsunder": "+100"
+        },
+        {
+            "name": "Michael Toglia",
+            "over": "52.03",
+            "under": "47.97",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Michael_Toglia_4347e8b8-971e-4ea4-8339-62507df77ca5.webp",
+            "oddsover": "-125",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Tyler O'Neill",
+            "over": "51.01",
+            "under": "48.99",
+            "line": 2.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Tyler_O'Neill_65fc46ca-350d-4eaf-bc40-8851c3378bc6.webp",
+            "oddsover": "-120",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Jake Meyers",
+            "over": "51.01",
+            "under": "48.99",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Jake_Meyers_42258713-4e3e-4fdb-9604-ee1560adb523.webp",
+            "oddsover": "-120",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Anthony Rendon",
+            "over": "47.54",
+            "under": "52.46",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Anthony_Rendon_78712aa3-b342-48ee-a0cc-ab90d5dd3618.webp",
+            "oddsover": "-105",
+            "oddsunder": "-130"
+        },
+        {
+            "name": "Cal Raleigh",
+            "over": "50.00",
+            "under": "50.00",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Cal_Raleigh_7f4e9216-53eb-468a-bf55-9d8026c05642.webp",
+            "oddsover": "-115",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Josh Rojas",
+            "over": "52.46",
+            "under": "47.54",
+            "line": 0.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Josh_Rojas_cd4ccb68-8795-4486-a7d6-989072685c42.webp",
+            "oddsover": "-130",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Nolan Schanuel",
+            "over": "46.53",
+            "under": "53.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "+100",
+            "oddsunder": "-135"
+        },
+        {
+            "name": "Freddie Freeman",
+            "over": "52.46",
+            "under": "47.54",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Freddie_Freeman_ea1a2111-44cc-4996-babb-9439465e6760.webp",
+            "oddsover": "-130",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Heliot Ramos",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Heliot_Ramos_9374f764-2b83-4b88-a71f-c7563e9bb863.webp",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Jorge Soler",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Jorge_Soler_4eba23e5-b274-4a2b-a3c7-fe2009a90619.webp",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Matt Chapman",
+            "over": "48.53",
+            "under": "51.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Matt_Chapman_19e35294-99c1-4cd3-bf24-8c2bd0c4c512.webp",
+            "oddsover": "-110",
+            "oddsunder": "-125"
+        },
+        {
+            "name": "Patrick Bailey",
+            "over": "46.53",
+            "under": "53.47",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "+100",
+            "oddsunder": "-135"
+        },
+        {
+            "name": "Shohei Ohtani",
+            "over": "52.03",
+            "under": "47.97",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Shohei_Ohtani_80de60c9-74e3-4a50-b128-b3dc7456a254.webp",
+            "oddsover": "-125",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Will Smith",
+            "over": "50.49",
+            "under": "49.51",
+            "line": 1.5,
+            "market": "Hits+Runs+RBIs",
+            "url": "https://static.prizepicks.com/images/players/mlb/Will_Smith_317b24ac-6a9b-4735-a4c5-64d879cd6bf7.webp",
+            "oddsover": "-120",
+            "oddsunder": "-115"
+        },
+        {
+            "name": "Bailey Ober",
+            "over": "52.03",
+            "under": "47.97",
+            "line": 5.5,
+            "market": "Pitcher Strikeouts",
+            "url": "https://static.prizepicks.com/images/players/mlb/Bailey_Ober_d596dae4-f972-444d-9db0-4efd47b0fb44.webp",
+            "oddsover": "-125",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Michael Lorenzen",
+            "over": "48.43",
+            "under": "51.57",
+            "line": 4.5,
+            "market": "Pitcher Strikeouts",
+            "url": "https://static.prizepicks.com/images/players/mlb/Michael_Lorenzen_4150b3f7-beb3-4fbc-a947-933d45d20bfe.webp",
+            "oddsover": "-105",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Javier Assad",
+            "over": "48.43",
+            "under": "51.57",
+            "line": 3.5,
+            "market": "Pitcher Strikeouts",
+            "url": "https://static.prizepicks.com/images/players/mlb/Javier_Assad_564bb787-e788-4acf-9dab-1da0e14578e0.webp",
+            "oddsover": "-105",
+            "oddsunder": "-120"
+        },
+        {
+            "name": "Tobias Myers",
+            "over": "50.52",
+            "under": "49.48",
+            "line": 4.5,
+            "market": "Pitcher Strikeouts",
+            "url": "https://static.prizepicks.com/images/players/mlb/Tobias_Myers_ca6fc8d3-9e53-4140-aea1-04ae893c3a30.webp",
+            "oddsover": "-115",
+            "oddsunder": "-110"
+        },
+        {
+            "name": "Yilber Diaz",
+            "over": "51.57",
+            "under": "48.43",
+            "line": 3.5,
+            "market": "Pitcher Strikeouts",
+            "url": "https://static.prizepicks.com/images/players/placeholder.png",
+            "oddsover": "-120",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Tanner Houck",
+            "over": "51.57",
+            "under": "48.43",
+            "line": 5.5,
+            "market": "Pitcher Strikeouts",
+            "url": "https://static.prizepicks.com/images/players/mlb/Tanner_Houck_1b0ad742-0bc5-49b0-abe0-005e8581b1d3.webp",
+            "oddsover": "-120",
+            "oddsunder": "-105"
+        },
+        {
+            "name": "Bryce Miller",
+            "over": "47.97",
+            "under": "52.03",
+            "line": 5.5,
+            "market": "Pitcher Strikeouts",
+            "url": "https://static.prizepicks.com/images/players/mlb/Bryce_Miller_3e72c29b-c305-4e6b-8311-0bec2e447b72.webp",
+            "oddsover": "-105",
+            "oddsunder": "-125"
+        }
+    ]
+}
+for x in obj["props"]:
+    if float(x["over"]) >= 55:
+        print(x, "Over")
+    elif float(x["under"]) >= 55:
+        print(x, "Under")
