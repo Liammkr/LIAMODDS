@@ -12,6 +12,9 @@ function findPlayerId(name) {
     if (sportvalue == "WNBA") {
       jsonData = WNBAjsonData;
     }
+    if (sportvalue == "NFL") {
+      jsonData = NFLjsonData;
+    }
     var data = JSON.parse(jsonData);
     var playerName = name;
     var playerId = null;
@@ -81,6 +84,19 @@ function getCategoryName(market) {
     batter_total_bases: "Total Bases",
     batter_walks: "Walks",
     batter_strikeouts: "Hitter Strikeouts",
+    player_pass_tds: "Pass TDs",
+    player_pass_yds: "Pass Yards",
+    player_pass_completions: "Pass Completions",
+    player_pass_attempts: "Pass Attempts",
+    player_rush_yds: "Rush Yards",
+    player_rush_attempts: "Rush Attempts",
+    player_rush_longest: "Longest Rush",
+    player_rush_longest: "Receptions",
+    player_reception_yds: "Recieving Yards",
+    player_reception_longest: "Longest Reception",
+    player_kicking_points: "Kicking Points",
+    player_field_goals: "FG Made",
+    player_tackles_assists: "Tackles+Assists",
   };
   return categoryMap[market] || "";
 }

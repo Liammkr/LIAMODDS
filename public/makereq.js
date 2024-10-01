@@ -16,16 +16,13 @@ function novig(odd1, odd2) {
 
   return noVigPercentage1.toFixed(2);
 }
-database.ref("liamkr/keynmbr").on("value", (snapshot) => {
-  data = snapshot.val();
-  keynmbr = data;
-});
+
+if (localStorage.getItem("keynmbr") == null) {
+  localStorage.setItem("keynmbr", 0);
+}
 function makeRequest(eventID, bookmaker, sectionContent) {
   numofprops = 0;
-  database.ref("liamkr").on("value", (snapshot) => {
-    data = snapshot.val();
-    keynmbr = data.keynmbr;
-  });
+
   var sport = document.getElementById("sportSelect").value;
   var markets = "";
 
@@ -37,6 +34,9 @@ function makeRequest(eventID, bookmaker, sectionContent) {
       "batter_hits_runs_rbis,batter_runs_scored,batter_strikeouts,batter_total_bases,batter_walks";
   } else if (sport == "icehockey_nhl") {
     markets = "player_points,player_assists,player_shots_on_goal";
+  } else if (sport == "americanfootball_nfl") {
+    markets =
+      "player_pass_tds,player_pass_yds,player_pass_completions,player_pass_attempts,player_rush_yds,player_rush_attempts,player_rush_longest,player_receptions,player_reception_yds,player_reception_longest,player_kicking_points,player_field_goals,player_tackles_assists";
   }
 
   fetch(
@@ -45,7 +45,7 @@ function makeRequest(eventID, bookmaker, sectionContent) {
       "/events/" +
       eventID +
       "/odds?apiKey=" +
-      apiKey[keynmbr] +
+      apiKey[localStorage.getItem("keynmbr")] +
       "&bookmakers=" +
       bookmaker +
       "&markets=" +
@@ -168,13 +168,24 @@ function makeRequest(eventID, bookmaker, sectionContent) {
     .catch((error) => {
       console.error("Error fetching odds data:", error);
       sectionContent.innerHTML = "<p>Error fetching odds data</p>";
-      if (keynmbr < apiKey.length - 1) {
-        firebase
-          .database()
-          .ref("liamkr/keynmbr")
-          .set(keynmbr + 1);
-      } else {
-        firebase.database().ref("liamkr/keynmbr").set(0);
+      let last = localStorage.getItem("keynmbr");
+
+      // Step 2: Convert the value to a number
+      last = parseInt(last, 10); // Use parseFloat(last) if dealing with decimal numbers
+
+      // Step 3: Handle cases where the value might not be a valid number
+      if (isNaN(last)) {
+        last = 0; // Default to 0 if the value is not a number or is null
       }
+
+      // Perform operations
+      if (keynmbr < apiKey.length - 1) {
+        last = last + 1;
+      } else {
+        last = 0;
+      }
+
+      // Step 4: Store the new value back in localStorage
+      localStorage.setItem("keynmbr", last.toString());
     });
 }

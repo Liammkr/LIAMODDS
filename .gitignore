@@ -26,3 +26,4 @@ emailout.py
 scrape/
 prizepicks api refresher/
 .env
+/backend

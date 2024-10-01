@@ -5,7 +5,7 @@ var nbamap = {
   cavaliers: 39,
   magic: 53,
   pacers: 54,
-  sixers: 55,
+  "76ers": 55,
   heat: 48,
   bulls: 41,
   hawks: 37,
@@ -30,6 +30,41 @@ var nbamap = {
   spurs: 59,
   blazers: 57,
 };
+var nflmap = {
+  cardinals: "ARI",
+  falcons: "ATL",
+  panthers: "CAR",
+  bears: "CHI",
+  cowboys: "DAL",
+  lions: "DET",
+  packers: "GB",
+  rams: "LA",
+  vikings: "MIN",
+  saints: "NO",
+  giants: "NYG",
+  eagles: "PHI",
+  "49ers": "SF",
+  seahaws: "SEA",
+  buccaneers: "TB",
+  commanders: "WAS",
+  ravens: "BAL",
+  bills: "BUF",
+  bengals: "CIN",
+  browns: "CLE",
+  broncos: "DEN",
+  texans: "HOU",
+  colts: "IND",
+  jaguars: "JAX",
+  chiefs: "KC",
+  raiders: "LV",
+  chargers: "LAC",
+  dolphins: "MIA",
+  patriots: "NE",
+  jets: "NYJ",
+  steelers: "PIT",
+  titans: "TEN",
+  seahawks: "SEA",
+};
 var nhlmap = {
   ducks: "ANA",
   coyotes: "ARI",
@@ -39,9 +74,9 @@ var nhlmap = {
   hurricanes: "CAR",
   blackhawks: "CHI",
   avalanche: "COL",
-  bluejackets: "CBJ",
+  jackets: "CBJ",
   stars: "DAL",
-  redwings: "DET",
+  wings: "DET",
   oilers: "EDM",
   panthers: "FLA",
   kings: "LAK",
@@ -60,10 +95,11 @@ var nhlmap = {
   lightning: "TBL",
   mapleleafs: "TOR",
   canucks: "VAN",
-  goldenknights: "VGK",
+  knights: "VGK",
   capitals: "WSH",
   jets: "WPG",
   club: "UTA",
+  leafs: "TOR",
 };
 var mlbmap = {
   angels: 108,
@@ -138,8 +174,6 @@ function getData(url) {
     });
 }
 
-var database = firebase.database();
-
 var data, newdata;
 /*database
   .ref("liamkr")
@@ -185,6 +219,12 @@ getData(
   WNBAjsonData = data;
   console.log("WNBA Loaded");
 });
+getData(
+  "https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/NFL?alt=media"
+).then((data) => {
+  NFLjsonData = data;
+  console.log("NFL Loaded");
+});
 /*database.ref("liamkr").update({
   run_script: true,
 });*/
@@ -204,49 +244,16 @@ var MLBjsonData,
   imageurl,
   currentLine;
 var filterBY = 50;
-var emailsRef = database.ref("liamkr/emails");
-function getRandomHexString(length) {
-  // Ensure the length is an even number, as each hex digit represents 4 bits
-  if (length % 2 !== 0) {
-    throw new Error("Length must be an even number");
-  }
-
-  // Generate a random number with the specified number of hex digits
-  const randomHex = Array.from({ length: length / 2 }, () =>
-    Math.floor(Math.random() * 256)
-      .toString(16)
-      .padStart(2, "0")
-  ).join("");
-
-  return randomHex;
-}
-function addEmailIfNotExists(email) {
-  const token = getRandomHexString(16);
-  database
-    .ref("liamkr/emails/" + token)
-    .set({
-      email: email,
-      token: token,
-    })
-    .then(function () {
-      //alert("Successfully Subscribed!");
-      localStorage.setItem("emailsent", "emailrecieved");
-      document.getElementById("notis").remove();
-    })
-    .catch(function (error) {
-      alert("Error adding email: ", error);
-    });
-}
 
 window.addEventListener("load", (event) => {
   if (localStorage.getItem("emailsent") != "emailrecieved") {
     document.getElementById("notis").innerHTML = `   <div class="form">
   <button class="close-btn" onclick="closebtn()">&times;</button>
   <span class="title">Stay Updated</span>
-  <p class="description">Receive Notifications For When Positive EV Props Appear.</p>
+  <p class="description">Receive one free notification per day for Positive EV Props, and enjoy unlimited notifications with a subscription.</p>
   <div>
     <input placeholder="Enter your email" type="email" id="email-address">
-    <button id="subscribe" onclick="addEmailIfNotExists(document.getElementById('email-address').value);">Subscribe</button>
+    <button id="subscribe">Subscribe</button>
   </div>      
 </div>`;
   }
@@ -306,153 +313,170 @@ function loadDataFromFile(filePath, callback) {
 }
 
 document.getElementById("sportSelect").addEventListener("change", function () {
-  if (this.value == "basketball_nba") {
-    sportvalue = "NBA";
-  }
-  if (this.value == "basketball_wnba") {
-    sportvalue = "WNBA";
-  }
-  if (this.value == "baseball_mlb") {
-    sportvalue = "MLB";
-  }
-  if (this.value == "icehockey_nhl") {
-    sportvalue = "NHL";
-  }
-  if (document.getElementById("bookmakerSelect").value == "draftkings") {
-    var bookmakertitle = "DraftKings";
-  }
-  if (document.getElementById("bookmakerSelect").value == "fanduel") {
-    var bookmakertitle = "FanDuel";
-  }
-  document.title = "Liam Odds | " + sportvalue;
-  var selectedSport = this.value;
-  var selectedBookmaker = document.getElementById("bookmakerSelect").value;
-  var responseContainer = document.getElementById("responseContainer");
-  responseContainer.innerHTML = "";
+  console.log(this.value);
+  if (this.value != "best_sprt") {
+    if (this.value == "basketball_nba") {
+      sportvalue = "NBA";
+    }
+    if (this.value == "basketball_wnba") {
+      sportvalue = "WNBA";
+    }
+    if (this.value == "baseball_mlb") {
+      sportvalue = "MLB";
+    }
+    if (this.value == "icehockey_nhl") {
+      sportvalue = "NHL";
+    }
+    if (this.value == "americanfootball_nfl") {
+      sportvalue = "NFL";
+    }
+    if (document.getElementById("bookmakerSelect").value == "draftkings") {
+      var bookmakertitle = "DraftKings";
+    }
+    if (document.getElementById("bookmakerSelect").value == "fanduel") {
+      var bookmakertitle = "FanDuel";
+    }
+    document.title = "Liam Odds | " + sportvalue;
+    var selectedSport = this.value;
+    var selectedBookmaker = document.getElementById("bookmakerSelect").value;
+    const responseContainer = document.getElementById("responseContainer");
+    responseContainer.innerHTML = "";
 
-  fetch(
-    "https://api.the-odds-api.com/v4/sports/" +
-      selectedSport +
-      "/events?apiKey=" +
-      apiKey[0]
-  )
-    .then((response) => response.json())
-    .then((events) => {
-      if (events.length === 0) {
-        var sectionContent = document.createElement("div");
-        sectionContent.className = "section-content";
-        sectionContent.style.display = "none";
-
-        var section = document.createElement("div");
-        section.className = "section";
-        section.innerHTML = "<p>No Current Games</p>";
-        section.appendChild(sectionContent);
-        responseContainer.appendChild(section);
-        console.log("No events found");
-      } else {
-        events.forEach((event) => {
+    fetch(
+      "https://api.the-odds-api.com/v4/sports/" +
+        selectedSport +
+        "/events?apiKey=" +
+        apiKey[0]
+    )
+      .then((response) => response.json())
+      .then((events) => {
+        if (events.length === 0) {
           var sectionContent = document.createElement("div");
           sectionContent.className = "section-content";
           sectionContent.style.display = "none";
 
           var section = document.createElement("div");
           section.className = "section";
-          const dateTimeString = event.commence_time;
-          const dateTime = new Date(dateTimeString);
+          section.innerHTML = "<p>No Current Games</p>";
+          section.appendChild(sectionContent);
+          responseContainer.appendChild(section);
+          console.log("No events found");
+        } else {
+          events.forEach((event) => {
+            var sectionContent = document.createElement("div");
+            sectionContent.className = "section-content";
+            sectionContent.style.display = "none";
 
-          const month = dateTime.getMonth() + 1;
-          const day = dateTime.getDate();
-          let hours = dateTime.getHours();
-          const minutes = dateTime.getMinutes();
-          const period = hours >= 12 ? "PM" : "AM";
+            var section = document.createElement("div");
+            section.className = "section";
+            const dateTimeString = event.commence_time;
+            const dateTime = new Date(dateTimeString);
 
-          hours = hours % 12 || 12;
+            const month = dateTime.getMonth() + 1;
+            const day = dateTime.getDate();
+            let hours = dateTime.getHours();
+            const minutes = dateTime.getMinutes();
+            const period = hours >= 12 ? "PM" : "AM";
 
-          const dateString = `${month}/${day}`;
-          const timeString = `${hours}:${minutes
-            .toString()
-            .padStart(2, "0")} ${period}`;
+            hours = hours % 12 || 12;
 
-          function lastWord(words) {
-            var wordArray = words.split(" ");
-            return wordArray[wordArray.length - 1];
-          }
+            const dateString = `${month}/${day}`;
+            const timeString = `${hours}:${minutes
+              .toString()
+              .padStart(2, "0")} ${period}`;
 
-          function findTeamNumber(teamName) {
-            var lowercaseTeamName = teamName.toLowerCase();
+            function lastWord(words) {
+              var wordArray = words.split(" ");
+              return wordArray[wordArray.length - 1];
+            }
+
+            function findTeamNumber(teamName) {
+              var lowercaseTeamName = teamName.toLowerCase();
+              if (sportvalue == "NBA") {
+                return nbamap[lowercaseTeamName];
+              }
+              if (sportvalue == "MLB") {
+                return mlbmap[lowercaseTeamName];
+              }
+              if (sportvalue == "NHL") {
+                return nhlmap[lowercaseTeamName];
+              }
+              if (sportvalue == "WNBA") {
+                return wnbamap[lowercaseTeamName];
+              }
+              if (sportvalue == "NFL") {
+                return nflmap[lowercaseTeamName];
+              } else {
+                return "Team not found" + teamName;
+              }
+            }
+
+            var hometeamNumber = findTeamNumber(lastWord(event.home_team));
+            var awayteamNumber = findTeamNumber(lastWord(event.away_team));
+
             if (sportvalue == "NBA") {
-              return nbamap[lowercaseTeamName];
-            }
-            if (sportvalue == "MLB") {
-              return mlbmap[lowercaseTeamName];
-            }
-            if (sportvalue == "NHL") {
-              return nhlmap[lowercaseTeamName];
-            }
-            if (sportvalue == "WNBA") {
-              return wnbamap[lowercaseTeamName];
+              var homeUrl =
+                "https://cdn.nba.com/logos/nba/16106127" +
+                hometeamNumber +
+                "/primary/L/logo.svg";
+              var awayUrl =
+                "https://cdn.nba.com/logos/nba/16106127" +
+                awayteamNumber +
+                "/primary/L/logo.svg";
+              var imageSizeWidth = 100;
+              var imageSizeHeight = 100;
+            } else if (sportvalue == "MLB") {
+              var homeUrl =
+                "https://www.mlbstatic.com/team-logos/team-primary-on-light/" +
+                hometeamNumber +
+                ".svg";
+              var awayUrl =
+                "https://www.mlbstatic.com/team-logos/team-primary-on-light/" +
+                awayteamNumber +
+                ".svg";
+              var imageSizeWidth = 80;
+              var imageSizeHeight = 80;
+            } else if (sportvalue == "NHL") {
+              var homeUrl =
+                "https://assets.nhle.com/logos/nhl/svg/" +
+                hometeamNumber +
+                "_dark.svg";
+              var awayUrl =
+                "https://assets.nhle.com/logos/nhl/svg/" +
+                awayteamNumber +
+                "_dark.svg";
+              var imageSizeWidth = 100;
+              var imageSizeHeight = 100;
+            } else if (sportvalue == "WNBA") {
+              var homeUrl =
+                "https://cdn.wnba.com/logos/wnba/16116613" +
+                hometeamNumber +
+                "/global/D/logo.svg";
+              var awayUrl =
+                "https://cdn.wnba.com/logos/wnba/16116613" +
+                awayteamNumber +
+                "/global/D/logo.svg";
+              var imageSizeWidth = 100;
+              var imageSizeHeight = 100;
+            } else if (sportvalue == "NFL") {
+              var homeUrl =
+                "https://static.www.nfl.com/t_headshot_desktop_2x/f_auto/league/api/clubs/logos/" +
+                hometeamNumber;
+              var awayUrl =
+                "https://static.www.nfl.com/t_headshot_desktop_2x/f_auto/league/api/clubs/logos/" +
+                awayteamNumber;
+              var imageSizeWidth = 100;
+              var imageSizeHeight = 100;
             } else {
-              return "Team not found" + teamName;
+              var homeUrl =
+                "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
+              var awayUrl =
+                "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
+              var imageSizeWidth = 80;
+              var imageSizeHeight = 80;
             }
-          }
-
-          var hometeamNumber = findTeamNumber(lastWord(event.home_team));
-          var awayteamNumber = findTeamNumber(lastWord(event.away_team));
-
-          if (sportvalue == "NBA") {
-            var homeUrl =
-              "https://cdn.nba.com/logos/nba/16106127" +
-              hometeamNumber +
-              "/primary/L/logo.svg";
-            var awayUrl =
-              "https://cdn.nba.com/logos/nba/16106127" +
-              awayteamNumber +
-              "/primary/L/logo.svg";
-            var imageSizeWidth = 100;
-            var imageSizeHeight = 100;
-          } else if (sportvalue == "MLB") {
-            var homeUrl =
-              "https://www.mlbstatic.com/team-logos/team-primary-on-light/" +
-              hometeamNumber +
-              ".svg";
-            var awayUrl =
-              "https://www.mlbstatic.com/team-logos/team-primary-on-light/" +
-              awayteamNumber +
-              ".svg";
-            var imageSizeWidth = 80;
-            var imageSizeHeight = 80;
-          } else if (sportvalue == "NHL") {
-            var homeUrl =
-              "https://assets.nhle.com/logos/nhl/svg/" +
-              hometeamNumber +
-              "_dark.svg";
-            var awayUrl =
-              "https://assets.nhle.com/logos/nhl/svg/" +
-              awayteamNumber +
-              "_dark.svg";
-            var imageSizeWidth = 100;
-            var imageSizeHeight = 100;
-          } else if (sportvalue == "WNBA") {
-            var homeUrl =
-              "https://cdn.wnba.com/logos/wnba/16116613" +
-              hometeamNumber +
-              "/global/D/logo.svg";
-            var awayUrl =
-              "https://cdn.wnba.com/logos/wnba/16116613" +
-              awayteamNumber +
-              "/global/D/logo.svg";
-            var imageSizeWidth = 100;
-            var imageSizeHeight = 100;
-          } else {
-            var homeUrl =
-              "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
-            var awayUrl =
-              "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
-            var imageSizeWidth = 80;
-            var imageSizeHeight = 80;
-          }
-          // Example HTML generation with images
-          section.innerHTML = `
+            // Example HTML generation with images
+            section.innerHTML = `
         <div class="section-header">
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <img src="${homeUrl}" alt="Home Team Logo" class="sectionimg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.jpg';">
@@ -462,35 +486,290 @@ document.getElementById("sportSelect").addEventListener("change", function () {
                 <div>${timeString} on ${dateString}</div>
             </div>
         `;
-          //section.innerHTML = '<div class="section-header">' + homelastWord + homeUrl+ ' vs ' + awaylastWord + awayUrl+ " on " +dateString+ " at "+ timeString+ '</div>';
-          section.appendChild(sectionContent);
+            //section.innerHTML = '<div class="section-header">' + homelastWord + homeUrl+ ' vs ' + awaylastWord + awayUrl+ " on " +dateString+ " at "+ timeString+ '</div>';
+            section.appendChild(sectionContent);
 
-          responseContainer.appendChild(section);
+            responseContainer.appendChild(section);
 
-          section
-            .querySelector(".section-header")
-            .addEventListener("click", function () {
-              hideAllSectionContents();
-              //buttonloc = document.getElementById("back");
-              //buttonloc.style.display = "";
-              test123 = document.getElementById("responseContainer");
-              //test123.style.display = "none";
-              if (sectionContent.style.display === "none") {
-                sectionContent.style.display = "block";
-                if (!sectionContent.getAttribute("data-loaded")) {
-                  makeRequest(event.id, selectedBookmaker, sectionContent);
-                  //sectionContent.setAttribute('data-loaded', 'true');
+            section
+              .querySelector(".section-header")
+              .addEventListener("click", function () {
+                hideAllSectionContents();
+                //buttonloc = document.getElementById("back");
+                //buttonloc.style.display = "";
+                test123 = document.getElementById("responseContainer");
+                //test123.style.display = "none";
+                if (sectionContent.style.display === "none") {
+                  sectionContent.style.display = "block";
+                  if (!sectionContent.getAttribute("data-loaded")) {
+                    makeRequest(event.id, selectedBookmaker, sectionContent);
+                    //sectionContent.setAttribute('data-loaded', 'true');
+                  }
+                } else {
+                  sectionContent.style.display = "none";
                 }
-              } else {
-                sectionContent.style.display = "none";
-              }
-            });
+              });
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching event IDs:", error);
+      });
+  } /*else {
+    const responseContainer2 = document.getElementById("responseContainer");
+    responseContainer2.innerHTML = "";
+    document.title = "Liam Odds | All Sports";
+    var htmltest = '<div style="width:70%"class="grid-container">';
+    loggedin = true;
+    if (loggedin == true) {
+      fetch(
+        "https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/uploads%2Ftopdata.json?alt=media"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const props = data.props; // Access the props array
+          for (let i = 0; i < props.length; i++) {
+            console.log(props[i]);
+            if (props[i].over > props[i].under) {
+              htmltest +=
+                `<div class="card">
+                            <img src="` +
+                props[i].url +
+                `" alt="` +
+                props[i].name +
+                `">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>` +
+                props[i].name +
+                `</div>
+                                </div>
+                                <div class="points">
+                                    ` +
+                props[i].line +
+                ` <span>` +
+                props[i].market +
+                `</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="right">LESS ` +
+                props[i].under +
+                `%</button>
+                                    <button class="more">MORE</button>
+                                </div>
+                            </div>
+                        </div>`;
+            } else {
+              htmltest +=
+                `<div class="card">
+                            <img src="` +
+                props[i].url +
+                `" alt="` +
+                props[i].name +
+                `">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>` +
+                props[i].name +
+                `</div>
+                                </div>
+                                <div class="points">
+                                    ` +
+                props[i].line +
+                ` <span>` +
+                props[i].market +
+                `</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="more">LESS</button>
+                                    <button class="right">MORE ` +
+                props[i].over +
+                `%</button>
+                                </div>
+                            </div>
+                        </div>`;
+            }
+          }
+          htmltest += "</div>";
+
+          responseContainer2.innerHTML = htmltest;
         });
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching event IDs:", error);
-    });
+    } else {
+      fetch(
+        "https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/uploads%2Ftop1.json?alt=media"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.over >= data.under) {
+            htmltest +=
+              `<div class="card">
+                            <img src="` +
+              data.url +
+              `" alt="` +
+              data.name +
+              `">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>` +
+              data.name +
+              `</div>
+                                </div>
+                                <div class="points">
+                                    ` +
+              data.line +
+              ` <span>` +
+              data.market +
+              `</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="right">LESS ` +
+              data.under +
+              `%</button>
+                                    <button class="more">MORE</button>
+                                </div>
+                            </div>
+                        </div>`;
+            for (let i = 0; i < 2; i++) {
+              htmltest +=
+                `<div class="card" style="filter: blur(10px)">
+                            <img src="` +
+                data.url +
+                `" alt="` +
+                data.name +
+                `">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>` +
+                data.name +
+                `</div>
+                                </div>
+                                <div class="points">
+                                    ` +
+                data.line +
+                ` <span>` +
+                data.market +
+                `</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="right">LESS ` +
+                data.under +
+                `%</button>
+                                    <button class="more">MORE</button>
+                                </div>
+                            </div>
+                        </div>`;
+            }
+          } else if (data.over < data.under) {
+            htmltest +=
+              `<div class="card ">
+                            <img src="` +
+              data.url +
+              `" alt="` +
+              data.name +
+              `">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>` +
+              data.name +
+              `</div>
+                                </div>
+                                <div class="points">
+                                    ` +
+              data.line +
+              ` <span>` +
+              data.market +
+              `</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="more">LESS</button>
+                                    <button class="right">MORE ` +
+              data.over +
+              `%</button>
+                                </div>
+                            </div>
+                        </div>`;
+            for (let i = 0; i < 2; i++) {
+              htmltest +=
+                `<div class="card" style="filter: blur(10px)">
+                            <img src="` +
+                data.url +
+                `" alt="` +
+                data.name +
+                `">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>` +
+                data.name +
+                `</div>
+                                </div>
+                                <div class="points">
+                                    ` +
+                data.line +
+                ` <span>` +
+                data.market +
+                `</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="more">LESS</button>
+                                    <button class="right">MORE ` +
+                data.over +
+                `%</button>
+                                </div>
+                            </div>
+                        </div>`;
+            }
+          }
+          htmltest += "</div>";
+
+          responseContainer2.innerHTML = htmltest;
+        });
+    }*/
+  /*htmltest += `<div class="card">
+                            <img src="https://static.prizepicks.com/images/players/mlb/Masataka_Yoshida_6de34681-ea14-4946-a3de-26053e746465.webp" alt="Masataka Yoshida">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>Masataka Yoshida</div>
+                                </div>
+                                <div class="points">
+                                    0.5 <span>Runs</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="right">LESS 57.80%</button>
+                                    <button class="more">MORE</button>
+                                </div>
+                            </div>
+                        </div>`;
+    htmltest += `<div class="card" style="filter: blur(10px)">
+                            <img src="https://static.prizepicks.com/images/players/mlb/Masataka_Yoshida_6de34681-ea14-4946-a3de-26053e746465.webp" alt="Masataka Yoshida">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>Masataka Yoshida</div>
+                                </div>
+                                <div class="points">
+                                    0.5 <span>Runs</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="right">LESS 57.80%</button>
+                                    <button class="more">MORE</button>
+                                </div>
+                            </div>
+                        </div>`;
+    htmltest += `<div class="card" style="filter: blur(10px)">
+                            <img src="https://static.prizepicks.com/images/players/mlb/Masataka_Yoshida_6de34681-ea14-4946-a3de-26053e746465.webp" alt="Masataka Yoshida">
+                            <div class="info">
+                                <div class="player-info">
+                                    <div>Masataka Yoshida</div>
+                                </div>
+                                <div class="points">
+                                    0.5 <span>Runs</span>
+                                </div>
+                                <div class="buttons">
+                                    <button class="right">LESS 57.80%</button>
+                                    <button class="more">MORE</button>
+                                </div>
+                            </div>
+                        </div>`;
+  }*/
 });
 
 document.getElementById("sportSelect").dispatchEvent(new Event("change"));
