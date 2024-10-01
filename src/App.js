@@ -13,14 +13,14 @@ import {
 } from "firebase/auth";
 import { getDatabase, ref, set, get, child } from "firebase/database";
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyB_ve0_tAF3TbkH_sF9i8Td7EltJf_m_e0",
+  authDomain: "liamkrodds.firebaseapp.com",
+  databaseURL: "https://liamkrodds-default-rtdb.firebaseio.com",
+  projectId: "liamkrodds",
+  storageBucket: "liamkrodds.appspot.com",
+  messagingSenderId: "62124083693",
+  appId: "1:62124083693:web:d8650c5ede061bc666bfe4",
+  measurementId: "G-ZLSBRFXPP0",
 };
 
 function App() {
