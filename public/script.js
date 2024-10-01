@@ -137,13 +137,6 @@ function getData(url) {
       throw error;
     });
 }
-firebaseConfig = {
-  authDomain: "liamkrodds.firebaseapp.com",
-  databaseURL: "https://liamkrodds-default-rtdb.firebaseio.com",
-  projectId: "liamkrodds",
-  storageBucket: "liamkrodds.appspot.com",
-};
-firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
@@ -228,31 +221,20 @@ function getRandomHexString(length) {
   return randomHex;
 }
 function addEmailIfNotExists(email) {
-  emailsRef
-    .orderByChild("email")
-    .equalTo(email)
-    .once("value", function (snapshot) {
-      if (snapshot.exists()) {
-        alert("Email already exists:", email);
-      } else {
-        emailsRef
-          .push()
-          .set({
-            email: email,
-            token: getRandomHexString(10),
-          })
-          .then(function () {
-            alert("Successfully Subscribed!");
-            localStorage.setItem("emailsent", "emailrecieved");
-            document.getElementById("notis").remove();
-          })
-          .catch(function (error) {
-            alert("Error adding email: ", error);
-          });
-      }
+  const token = getRandomHexString(16);
+  database
+    .ref("liamkr/emails/" + token)
+    .set({
+      email: email,
+      token: token,
+    })
+    .then(function () {
+      //alert("Successfully Subscribed!");
+      localStorage.setItem("emailsent", "emailrecieved");
+      document.getElementById("notis").remove();
     })
     .catch(function (error) {
-      alert("Error checking email existence: ", error);
+      alert("Error adding email: ", error);
     });
 }
 
@@ -264,7 +246,7 @@ window.addEventListener("load", (event) => {
   <p class="description">Receive Notifications For When Positive EV Props Appear.</p>
   <div>
     <input placeholder="Enter your email" type="email" id="email-address">
-    <button onclick="addEmailIfNotExists(document.getElementById('email-address').value);">Subscribe</button>
+    <button id="subscribe" onclick="addEmailIfNotExists(document.getElementById('email-address').value);">Subscribe</button>
   </div>      
 </div>`;
   }

@@ -21,8 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-keys.json
-emailout.py
-scrape/
-prizepicks api refresher/
-.env

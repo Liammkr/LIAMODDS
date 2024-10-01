@@ -4,9 +4,9 @@ body {
   color: #ecf0f1;
   text-align: center;
 }
-
-h2 {
-  color: #9b59b6;
+@font-face {
+  font-family: "YourFontName"; /*a name to be used later*/
+  src: url("republiko.regular.otf"); /*URL to font*/
 }
 
 select {
@@ -295,6 +295,26 @@ button:hover span:after {
   font-size: 2.3rem;
   cursor: pointer;
 }
+.close-btn2 {
+  position: absolute;
+  top: 10%;
+  right: 25%;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.3rem;
+  cursor: pointer;
+}
+.close-btn3 {
+  position: absolute;
+  top: 20%;
+  right: 25%;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.3rem;
+  cursor: pointer;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -359,6 +379,131 @@ button:hover span:after {
   border: none;
   outline: none;
 }
+.form div button:hover {
+  background-color: #555555;
+}
+
+/* Styles for the overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it's on top */
+}
+
+.overlay-content {
+  background-color: #2e2e2e;
+  padding: 20px;
+  text-align: center;
+  border-radius: 25px;
+  border: 2px solid rgb(99 102 241);
+  padding: 20px;
+  width: 40%;
+  margin: 0 auto; /* Center horizontally */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  height: 55%;
+  color: white;
+}
+.overlay-content2 {
+  background-color: #2e2e2e;
+  padding: 20px;
+  text-align: center;
+  border-radius: 25px;
+  border: 2px solid rgb(99 102 241);
+  padding: 20px;
+  width: 40%;
+  margin: 0 auto; /* Center horizontally */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  height: 35%;
+  color: white;
+}
+.mainbutton,
+.logos {
+  margin: 10px 0;
+}
+
+.logos img {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.google-sign-in {
+  background-color: #1e1e1e;
+  color: #ecf0f1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 40%;
+}
+
+.but2:hover {
+  background-color: #555555;
+}
+
+.idk {
+  background-color: #1e1e1e;
+  color: #ecf0f1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 70%;
+  margin: 10px;
+}
+
+.google img {
+  width: 25px;
+  margin-right: 10px;
+}
+
+.google {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.liamodds {
+  width: 100%;
+}
+.mainbutton {
+  color: #ecf0f1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 40%;
+  display: block;
+  background: rgb(99 102 241);
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.mainbutton:hover {
+  background-color: #555555;
+}
+
+.idk:hover {
+  background-color: #555555;
+  color: white;
+}
+
 @media only screen and (max-width: 600px) {
   body {
     font-family: Arial, sans-serif;
