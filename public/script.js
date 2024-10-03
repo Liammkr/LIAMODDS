@@ -285,8 +285,8 @@ var sport = null;
 if (localStorage.getItem("sport") != null) {
   var sport = localStorage.getItem("sport");
 } else {
-  localStorage.setItem("sport", "basketball_nba");
-  var sport = "basketball_nba";
+  localStorage.setItem("sport", "best_sprt");
+  var sport = "best_sprt";
 }
 document.getElementById("sportSelect").value = sport;
 document
