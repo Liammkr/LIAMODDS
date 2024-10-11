@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# LiamOdds - Positive EV PrizePicks Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to **LiamOdds**, the ultimate tracker for finding positive expected value (EV) picks on PrizePicks! This tool covers a wide range of sports including NBA, WNBA, NHL, and MLB. Designed to help you make informed decisions and maximize your potential returns, LiamOdds is your go-to resource for sports betting analysis.
 
-## Available Scripts
+## Website
 
-In the project directory, you can run:
+Visit the website at [liamkr.com](https://liamkr.com) to start exploring the latest picks and insights.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Positive EV Picks**: Identify picks with positive expected value to enhance your betting strategy.
+- **Comprehensive Coverage**: Track NBA, WNBA, NHL, and MLB games.
+- **User-Friendly Interface**: Easily navigate through different sports and picks.
+- **Regular Updates**: Stay up-to-date with the latest data and trends.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Sports Covered
 
-### `npm test`
+- **NBA**: National Basketball Association
+- **WNBA**: Women's National Basketball Association
+- **NHL**: National Hockey League
+- **MLB**: Major League Baseball
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+1. **Visit the Website**: Go to [liamkr.com](https://liamkr.com).
+2. **Browse Picks**: Explore the available picks for NBA, WNBA, NHL, and MLB.
+3. **Analyze**: Use the positive EV data to make informed decisions.
+4. **Bet**: Place your bets on PrizePicks based on the insights from LiamOdds.
+5. **Track Results**: Keep track of your bets and monitor your performance.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Contributing
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+We welcome contributions from the community! If you have any suggestions or improvements, please feel free to create a pull request or open an issue.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contact
 
-### `npm run eject`
+For any inquiries or support, please contact us at support@liamkr.com.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## License
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for using LiamOdds! We hope this tool helps you make better betting decisions and achieve great results.
