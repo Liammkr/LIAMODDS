@@ -362,121 +362,123 @@ document.getElementById("sportSelect").addEventListener("change", function () {
           responseContainer.appendChild(section);
           console.log("No events found");
         } else {
+          count = 0;
           events.forEach((event) => {
-            var sectionContent = document.createElement("div");
-            sectionContent.className = "section-content";
-            sectionContent.style.display = "none";
+            if (count < 10) {
+              var sectionContent = document.createElement("div");
+              sectionContent.className = "section-content";
+              sectionContent.style.display = "none";
 
-            var section = document.createElement("div");
-            section.className = "section";
-            const dateTimeString = event.commence_time;
-            const dateTime = new Date(dateTimeString);
+              var section = document.createElement("div");
+              section.className = "section";
+              const dateTimeString = event.commence_time;
+              const dateTime = new Date(dateTimeString);
 
-            const month = dateTime.getMonth() + 1;
-            const day = dateTime.getDate();
-            let hours = dateTime.getHours();
-            const minutes = dateTime.getMinutes();
-            const period = hours >= 12 ? "PM" : "AM";
+              const month = dateTime.getMonth() + 1;
+              const day = dateTime.getDate();
+              let hours = dateTime.getHours();
+              const minutes = dateTime.getMinutes();
+              const period = hours >= 12 ? "PM" : "AM";
 
-            hours = hours % 12 || 12;
+              hours = hours % 12 || 12;
 
-            const dateString = `${month}/${day}`;
-            const timeString = `${hours}:${minutes
-              .toString()
-              .padStart(2, "0")} ${period}`;
+              const dateString = `${month}/${day}`;
+              const timeString = `${hours}:${minutes
+                .toString()
+                .padStart(2, "0")} ${period}`;
 
-            function lastWord(words) {
-              var wordArray = words.split(" ");
-              return wordArray[wordArray.length - 1];
-            }
+              function lastWord(words) {
+                var wordArray = words.split(" ");
+                return wordArray[wordArray.length - 1];
+              }
 
-            function findTeamNumber(teamName) {
-              var lowercaseTeamName = teamName.toLowerCase();
+              function findTeamNumber(teamName) {
+                var lowercaseTeamName = teamName.toLowerCase();
+                if (sportvalue == "NBA") {
+                  return nbamap[lowercaseTeamName];
+                }
+                if (sportvalue == "MLB") {
+                  return mlbmap[lowercaseTeamName];
+                }
+                if (sportvalue == "NHL") {
+                  return nhlmap[lowercaseTeamName];
+                }
+                if (sportvalue == "WNBA") {
+                  return wnbamap[lowercaseTeamName];
+                }
+                if (sportvalue == "NFL") {
+                  return nflmap[lowercaseTeamName];
+                } else {
+                  return "Team not found" + teamName;
+                }
+              }
+
+              var hometeamNumber = findTeamNumber(lastWord(event.home_team));
+              var awayteamNumber = findTeamNumber(lastWord(event.away_team));
+
               if (sportvalue == "NBA") {
-                return nbamap[lowercaseTeamName];
-              }
-              if (sportvalue == "MLB") {
-                return mlbmap[lowercaseTeamName];
-              }
-              if (sportvalue == "NHL") {
-                return nhlmap[lowercaseTeamName];
-              }
-              if (sportvalue == "WNBA") {
-                return wnbamap[lowercaseTeamName];
-              }
-              if (sportvalue == "NFL") {
-                return nflmap[lowercaseTeamName];
+                var homeUrl =
+                  "https://cdn.nba.com/logos/nba/16106127" +
+                  hometeamNumber +
+                  "/primary/L/logo.svg";
+                var awayUrl =
+                  "https://cdn.nba.com/logos/nba/16106127" +
+                  awayteamNumber +
+                  "/primary/L/logo.svg";
+                var imageSizeWidth = 100;
+                var imageSizeHeight = 100;
+              } else if (sportvalue == "MLB") {
+                var homeUrl =
+                  "https://www.mlbstatic.com/team-logos/team-primary-on-light/" +
+                  hometeamNumber +
+                  ".svg";
+                var awayUrl =
+                  "https://www.mlbstatic.com/team-logos/team-primary-on-light/" +
+                  awayteamNumber +
+                  ".svg";
+                var imageSizeWidth = 80;
+                var imageSizeHeight = 80;
+              } else if (sportvalue == "NHL") {
+                var homeUrl =
+                  "https://assets.nhle.com/logos/nhl/svg/" +
+                  hometeamNumber +
+                  "_dark.svg";
+                var awayUrl =
+                  "https://assets.nhle.com/logos/nhl/svg/" +
+                  awayteamNumber +
+                  "_dark.svg";
+                var imageSizeWidth = 100;
+                var imageSizeHeight = 100;
+              } else if (sportvalue == "WNBA") {
+                var homeUrl =
+                  "https://cdn.wnba.com/logos/wnba/16116613" +
+                  hometeamNumber +
+                  "/global/D/logo.svg";
+                var awayUrl =
+                  "https://cdn.wnba.com/logos/wnba/16116613" +
+                  awayteamNumber +
+                  "/global/D/logo.svg";
+                var imageSizeWidth = 100;
+                var imageSizeHeight = 100;
+              } else if (sportvalue == "NFL") {
+                var homeUrl =
+                  "https://static.www.nfl.com/t_headshot_desktop_2x/f_auto/league/api/clubs/logos/" +
+                  hometeamNumber;
+                var awayUrl =
+                  "https://static.www.nfl.com/t_headshot_desktop_2x/f_auto/league/api/clubs/logos/" +
+                  awayteamNumber;
+                var imageSizeWidth = 100;
+                var imageSizeHeight = 100;
               } else {
-                return "Team not found" + teamName;
+                var homeUrl =
+                  "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
+                var awayUrl =
+                  "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
+                var imageSizeWidth = 80;
+                var imageSizeHeight = 80;
               }
-            }
-
-            var hometeamNumber = findTeamNumber(lastWord(event.home_team));
-            var awayteamNumber = findTeamNumber(lastWord(event.away_team));
-
-            if (sportvalue == "NBA") {
-              var homeUrl =
-                "https://cdn.nba.com/logos/nba/16106127" +
-                hometeamNumber +
-                "/primary/L/logo.svg";
-              var awayUrl =
-                "https://cdn.nba.com/logos/nba/16106127" +
-                awayteamNumber +
-                "/primary/L/logo.svg";
-              var imageSizeWidth = 100;
-              var imageSizeHeight = 100;
-            } else if (sportvalue == "MLB") {
-              var homeUrl =
-                "https://www.mlbstatic.com/team-logos/team-primary-on-light/" +
-                hometeamNumber +
-                ".svg";
-              var awayUrl =
-                "https://www.mlbstatic.com/team-logos/team-primary-on-light/" +
-                awayteamNumber +
-                ".svg";
-              var imageSizeWidth = 80;
-              var imageSizeHeight = 80;
-            } else if (sportvalue == "NHL") {
-              var homeUrl =
-                "https://assets.nhle.com/logos/nhl/svg/" +
-                hometeamNumber +
-                "_dark.svg";
-              var awayUrl =
-                "https://assets.nhle.com/logos/nhl/svg/" +
-                awayteamNumber +
-                "_dark.svg";
-              var imageSizeWidth = 100;
-              var imageSizeHeight = 100;
-            } else if (sportvalue == "WNBA") {
-              var homeUrl =
-                "https://cdn.wnba.com/logos/wnba/16116613" +
-                hometeamNumber +
-                "/global/D/logo.svg";
-              var awayUrl =
-                "https://cdn.wnba.com/logos/wnba/16116613" +
-                awayteamNumber +
-                "/global/D/logo.svg";
-              var imageSizeWidth = 100;
-              var imageSizeHeight = 100;
-            } else if (sportvalue == "NFL") {
-              var homeUrl =
-                "https://static.www.nfl.com/t_headshot_desktop_2x/f_auto/league/api/clubs/logos/" +
-                hometeamNumber;
-              var awayUrl =
-                "https://static.www.nfl.com/t_headshot_desktop_2x/f_auto/league/api/clubs/logos/" +
-                awayteamNumber;
-              var imageSizeWidth = 100;
-              var imageSizeHeight = 100;
-            } else {
-              var homeUrl =
-                "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
-              var awayUrl =
-                "https://raw.githubusercontent.com/Liammkr/WSTBET/main/AILogo.png";
-              var imageSizeWidth = 80;
-              var imageSizeHeight = 80;
-            }
-            // Example HTML generation with images
-            section.innerHTML = `
+              // Example HTML generation with images
+              section.innerHTML = `
         <div class="section-header">
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <img src="${homeUrl}" alt="Home Team Logo" class="sectionimg" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/Liammkr/WSTBET/main/BLACKIMG.jpg';">
@@ -486,29 +488,31 @@ document.getElementById("sportSelect").addEventListener("change", function () {
                 <div>${timeString} on ${dateString}</div>
             </div>
         `;
-            //section.innerHTML = '<div class="section-header">' + homelastWord + homeUrl+ ' vs ' + awaylastWord + awayUrl+ " on " +dateString+ " at "+ timeString+ '</div>';
-            section.appendChild(sectionContent);
+              //section.innerHTML = '<div class="section-header">' + homelastWord + homeUrl+ ' vs ' + awaylastWord + awayUrl+ " on " +dateString+ " at "+ timeString+ '</div>';
+              section.appendChild(sectionContent);
 
-            responseContainer.appendChild(section);
+              responseContainer.appendChild(section);
 
-            section
-              .querySelector(".section-header")
-              .addEventListener("click", function () {
-                hideAllSectionContents();
-                //buttonloc = document.getElementById("back");
-                //buttonloc.style.display = "";
-                test123 = document.getElementById("responseContainer");
-                //test123.style.display = "none";
-                if (sectionContent.style.display === "none") {
-                  sectionContent.style.display = "block";
-                  if (!sectionContent.getAttribute("data-loaded")) {
-                    makeRequest(event.id, selectedBookmaker, sectionContent);
-                    //sectionContent.setAttribute('data-loaded', 'true');
+              section
+                .querySelector(".section-header")
+                .addEventListener("click", function () {
+                  hideAllSectionContents();
+                  //buttonloc = document.getElementById("back");
+                  //buttonloc.style.display = "";
+                  test123 = document.getElementById("responseContainer");
+                  //test123.style.display = "none";
+                  if (sectionContent.style.display === "none") {
+                    sectionContent.style.display = "block";
+                    if (!sectionContent.getAttribute("data-loaded")) {
+                      makeRequest(event.id, selectedBookmaker, sectionContent);
+                      //sectionContent.setAttribute('data-loaded', 'true');
+                    }
+                  } else {
+                    sectionContent.style.display = "none";
                   }
-                } else {
-                  sectionContent.style.display = "none";
-                }
-              });
+                });
+              count++;
+            }
           });
         }
       })
