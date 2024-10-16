@@ -168,24 +168,12 @@ function makeRequest(eventID, bookmaker, sectionContent) {
     .catch((error) => {
       console.error("Error fetching odds data:", error);
       sectionContent.innerHTML = "<p>Error fetching odds data</p>";
-      let last = localStorage.getItem("keynmbr");
-
-      // Step 2: Convert the value to a number
-      last = parseInt(last, 10); // Use parseFloat(last) if dealing with decimal numbers
-
-      // Step 3: Handle cases where the value might not be a valid number
-      if (isNaN(last)) {
-        last = 0; // Default to 0 if the value is not a number or is null
-      }
-
-      // Perform operations
-      if (keynmbr < apiKey.length - 1) {
+      last = parseInt(localStorage.getItem("keynmbr"));
+      if (last < apiKey.length) {
         last = last + 1;
       } else {
         last = 0;
       }
-
-      // Step 4: Store the new value back in localStorage
-      localStorage.setItem("keynmbr", last.toString());
+      localStorage.setItem("keynmbr", last);
     });
 }
