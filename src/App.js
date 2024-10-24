@@ -40,7 +40,7 @@ function App() {
         htmltest = '<div style="width:100%"class="grid-container">';
       } else {
         console.log("User is on a desktop device.");
-        htmltest = '<div style="width:70%"class="grid-container">';
+        htmltest = '<div style="width:80%"class="grid-container">';
       }
       const auth = getAuth();
       const user = auth.currentUser;

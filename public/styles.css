@@ -417,7 +417,7 @@ button:hover span:after {
   flex-direction: column; /* Stack children vertically */
   align-items: center; /* Center children horizontally */
   justify-content: center; /* Center children vertically */
-  height: 55%;
+  height: 65%;
   color: white;
 }
 .overlay-content2 {

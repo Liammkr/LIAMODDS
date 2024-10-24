@@ -164,7 +164,7 @@
     border-radius: 5px;
     font-size: 16px;
     margin-bottom: 5px;
-    margin-top: 15 px;
+    margin-top: 0px;
   }
   .tree:hover {
     background-color: #555555;
@@ -573,5 +573,8 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+  }
+  .container3 {
+    margin-top: 20px;
   }
 }
