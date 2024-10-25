@@ -80,6 +80,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                        props[i].sport +
+                        " " +
                         props[i].name +
                         `</div>
                                 </div>
@@ -109,6 +111,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                        props[i].sport +
+                        " " +
                         props[i].name +
                         `</div>
                                 </div>
@@ -167,6 +171,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                      data.sport +
+                      " " +
                       data.name +
                       `</div>
                                 </div>
@@ -196,6 +202,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                        data.sport +
+                        " " +
                         data.name +
                         `</div>
                                 </div>
@@ -226,6 +234,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                      data.sport +
+                      " " +
                       data.name +
                       `</div>
                                 </div>
@@ -255,6 +265,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                        data.sport +
+                        " " +
                         data.name +
                         `</div>
                                 </div>
@@ -310,6 +322,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                data.sport +
+                " " +
                 data.name +
                 `</div>
                                 </div>
@@ -339,6 +353,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                  data.sport +
+                  " " +
                   data.name +
                   `</div>
                                 </div>
@@ -369,6 +385,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                data.sport +
+                " " +
                 data.name +
                 `</div>
                                 </div>
@@ -399,6 +417,8 @@ function App() {
                             <div class="info">
                                 <div class="player-info">
                                     <div>` +
+                  data.sport +
+                  " " +
                   data.name +
                   `</div>
                                 </div>
