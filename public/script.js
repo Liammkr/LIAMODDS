@@ -245,7 +245,7 @@ var MLBjsonData,
   currentLine;
 var filterBY = 50;
 
-window.addEventListener("load", (event) => {
+/*window.addEventListener("load", (event) => {
   if (localStorage.getItem("emailsent") != "emailrecieved") {
     document.getElementById("notis").innerHTML = `   <div class="form">
   <button class="close-btn" onclick="closebtn()">&times;</button>
@@ -254,6 +254,20 @@ window.addEventListener("load", (event) => {
   <div>
     <input placeholder="Enter your email" type="email" id="email-address">
     <button id="subscribe">Subscribe</button>
+  </div>      
+</div>`;
+  }
+});*/
+window.addEventListener("load", (event) => {
+  if (localStorage.getItem("emailsent") != "emailrecieved") {
+    document.getElementById("notis").innerHTML = `   <div class="form">
+  <button class="close-btn" onclick="closebtn()">&times;</button>
+  <span class="title">Stay Updated</span>
+  <p class="description">Receive one free notification per day for Positive EV Props, and enjoy unlimited notifications with a subscription.</p>
+  <div>
+    <button id="abcd" style="width:100%" onclick="window.open('https://discord.com/invite/eT6ZzResPT')">
+    <i class="fa-brands fa-discord"></i>
+     Discord</button>
   </div>      
 </div>`;
   }
