@@ -541,15 +541,63 @@ function App() {
         });
     };
     const starttopay = () => {
-      const signinbut = document.getElementById("in");
-      if (signinbut.style.display === "none") {
-        toast.success("Logged In , Coming soon");
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        fetch(
+          "https://smiling-lively-fabrosaurus.glitch.me/create-checkout-session?email=" +
+            user.email
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                "Network response was not ok " + response.statusText,
+                toast.error("Error Checking Out")
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            window.location = data.url; // Handle the data received from the server
+          });
       } else {
         toast.error("Please sign in or create account");
         document.getElementById("overlay").style.display = "flex";
       }
     };
+    const portalrequest = async () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
 
+      if (user) {
+        const useremailtemp = user.email;
+
+        try {
+          const response = await fetch(
+            "https://smiling-lively-fabrosaurus.glitch.me/create-customer-portal-session",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ useremailtemp }), // Send user email in the request body
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const data = await response.json(); // Await JSON parsing
+          window.location.href = data.url; // Redirect the user to the Customer Portal
+        } catch (error) {
+          console.error("Error opening customer portal:", error);
+          alert("Failed to open customer portal. Please try again.");
+        }
+      } else {
+        toast.error("Error Occurred: User is not authenticated");
+      }
+    };
     const loadpaid = () => {
       papaer();
     };
@@ -637,6 +685,7 @@ function App() {
     const logoutbutton = document.getElementById("logout");
     const paystart = document.getElementById("payup");
     const bestsprt = document.getElementById("best");
+    const portalbutton = document.getElementById("accountinfo");
 
     if (googleSignInButton)
       googleSignInButton.addEventListener("click", handleGoogleSignIn);
@@ -651,6 +700,7 @@ function App() {
     if (logoutbutton) logoutbutton.addEventListener("click", handleLogOut);
     if (paystart) paystart.addEventListener("click", starttopay);
     if (bestsprt) bestsprt.addEventListener("click", loadpaid);
+    if (portalbutton) portalbutton.addEventListener("click", portalrequest);
 
     return () => {
       if (googleSignInButton)
@@ -666,6 +716,8 @@ function App() {
       if (logoutbutton) logoutbutton.removeEventListener("click", handleLogOut);
       if (paystart) paystart.removeEventListener("click", starttopay);
       if (bestsprt) bestsprt.removeEventListener("click", loadpaid);
+      if (portalbutton)
+        portalbutton.removeEventListener("click", portalrequest);
     };
   }, []);
 
