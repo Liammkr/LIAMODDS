@@ -205,6 +205,9 @@ button:hover span:after {
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 20px;
   padding: 20px;
+  width: 85%;
+  margin-right: 7.5%;
+  margin-left: 7.5%;
 }
 .card {
   background-color: rgba(18, 19, 32, 1);
