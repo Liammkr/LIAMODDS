@@ -36,18 +36,32 @@ function App() {
         Array.isArray(window.prizepicksexportids) &&
         window.prizepicksexportids.length > 0
       ) {
-        // Map each object to the format: `id-ou-line`
         const projections = window.prizepicksexportids
-          .map(({ id, ou, line }) => `${id}-${ou}-${line}`)
+          .map(
+            ({ id, ou, line }) =>
+              `${encodeURIComponent(id)}-${encodeURIComponent(
+                ou
+              )}-${encodeURIComponent(line)}`
+          )
           .join(",");
 
-        // Construct the full URL
-        const url = `https://app.prizepicks.com/?projections=${projections}`;
+        const webUrl = `https://app.prizepicks.com/?projections=${projections}`;
+        const iosAppUrl = `prizepicks://app/projections?data=${encodeURIComponent(
+          projections
+        )}`;
 
-        console.log("Redirecting to:", url); // Debugging log
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          // Try to open the iOS app
+          window.location.href = iosAppUrl;
 
-        // Redirect the user
-        window.open(url);
+          // Fallback to the web URL if the app is not installed
+          setTimeout(() => {
+            window.location.href = webUrl;
+          }, 2000); // 2 seconds timeout
+        } else {
+          // Open in the browser for non-iOS devices
+          window.open(webUrl, "_blank");
+        }
       } else {
         console.error("No selections available to create a bet URL!");
         toast.error("No selections available!");
