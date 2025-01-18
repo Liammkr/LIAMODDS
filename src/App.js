@@ -30,17 +30,87 @@ function App() {
         navigator.userAgent
       );
     }
+    window.prizepicksexportids = [];
+    function handleBetButtonClick() {
+      if (
+        Array.isArray(window.prizepicksexportids) &&
+        window.prizepicksexportids.length > 0
+      ) {
+        // Map each object to the format: `id-ou-line`
+        const projections = window.prizepicksexportids
+          .map(({ id, ou, line }) => `${id}-${ou}-${line}`)
+          .join(",");
+
+        // Construct the full URL
+        const url = `https://app.prizepicks.com/?projections=${projections}`;
+
+        console.log("Redirecting to:", url); // Debugging log
+
+        // Redirect the user
+        window.open(url);
+      } else {
+        console.error("No selections available to create a bet URL!");
+        toast.error("No selections available!");
+      }
+    }
+    function updateexports(element, id, line, ou) {
+      const bet = document.getElementById("betonPP");
+      const parent = element.parentElement.parentElement.parentElement;
+
+      if (parent) {
+        const computedStyle = window.getComputedStyle(parent);
+        if (computedStyle.borderColor !== "rgb(99, 102, 241)") {
+          // Add the object to the global array
+          parent.style.borderColor = "rgb(99,102,241)";
+
+          if (Array.isArray(window.prizepicksexportids)) {
+            window.prizepicksexportids.push({ id, line, ou });
+            console.log("Added:", { id, line, ou });
+          } else {
+            console.error("prizepicksexportids is not an array!");
+          }
+        } else {
+          // Remove the object from the global array
+          parent.style.borderColor = "rgba(18, 19, 32, 1)";
+
+          if (Array.isArray(window.prizepicksexportids)) {
+            window.prizepicksexportids = window.prizepicksexportids.filter(
+              (item) => item.id !== id
+            );
+            console.log("Removed ID:", id);
+          } else {
+            console.error("prizepicksexportids is not an array!");
+          }
+        }
+
+        console.log("Updated export IDs:", window.prizepicksexportids);
+        if (bet && window.prizepicksexportids.length !== 0) {
+          bet.style.display = "block";
+        } else {
+          bet.style.display = "none";
+        }
+      }
+    }
+    window.handleBetButtonClick = handleBetButtonClick;
+    window.updateexports = updateexports;
     function papaer() {
       const responseContainer2 = document.getElementById("responseContainer");
       responseContainer2.innerHTML = "";
       var htmltest;
+      htmltest = `<button class="shadow__btn" id="betonPP" style="display: none" onclick="handleBetButtonClick()">
+  <span>
+    <img src="https://cdn.prod.website-files.com/64b5f8bfc12b3ec8aef889d7/64e61222b6292fb6b7113f15_Favicon.png" alt="icon" />Bet ↗
+  </span>
+</button>`;
       document.title = "Liam Odds | All Sports";
       if (isMobile()) {
         console.log("User is on a mobile device.");
-        htmltest = '<div style="width:100%"class="grid-container">';
+
+        htmltest += '<div style="width:100%"class="grid-container">';
       } else {
         console.log("User is on a desktop device.");
-        htmltest = '<div style="width:80%"class="grid-container">';
+
+        htmltest += '<div style="width:80%"class="grid-container">';
       }
       const auth = getAuth();
       const user = auth.currentUser;
@@ -94,7 +164,11 @@ function App() {
                                 </div>
                                 <div class="buttons">
                                     <button class="more">LESS</button>
-                                    <button class="right">MORE ` +
+                                    <button onclick="updateexports(this,` +
+                        props[i].playerid +
+                        `,` +
+                        props[i].line +
+                        `,'o')" class="right">MORE ` +
                         props[i].over +
                         `%</button>
                                 </div>
@@ -124,7 +198,11 @@ function App() {
                         `</span>
                                 </div>
                                 <div class="buttons">
-                                                      <button class="right">LESS ` +
+                                <button onclick="updateexports(this,` +
+                        props[i].playerid +
+                        `,` +
+                        props[i].line +
+                        `,'u')" class="right">LESS ` +
                         props[i].under +
                         `%</button>
                                     <button class="more">MORE</button>

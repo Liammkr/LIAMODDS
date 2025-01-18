@@ -218,6 +218,8 @@ button:hover span:after {
   display: flex;
   align-items: center;
   font-size: 20px;
+  border: solid;
+  border-color: rgba(18, 19, 32, 1);
 }
 .card img {
   width: 120px;
@@ -643,4 +645,36 @@ button:hover span:after {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+.shadow__btn {
+  padding: 10px 20px;
+  border: none;
+  font-size: 17px;
+  color: #ffff;
+  border-radius: 7px;
+  letter-spacing: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow;
+}
+
+.shadow__btn {
+  background: rgb(99 102 241);
+  box-shadow: 0 0 25px rgb(99 102 241);
+}
+
+.shadow__btn:hover {
+  box-shadow: 0 0 5px rgb(0, 140, 255), 0 0 25px rgb(0, 140, 255),
+    0 0 50px rgb(0, 140, 255), 0 0 100px rgb(0, 140, 255);
+}
+.shadow__btn span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Space between image and text */
+}
+
+.shadow__btn img {
+  width: 20px; /* Adjust size to match the button's style */
+  height: 20px;
 }
