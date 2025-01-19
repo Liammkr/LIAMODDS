@@ -45,23 +45,8 @@ function App() {
           )
           .join(",");
 
-        const webUrl = `https://app.prizepicks.com/?projections=${projections}`;
-        const iosAppUrl = `prizepicks://app/projections?data=${encodeURIComponent(
-          projections
-        )}`;
-
-        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-          // Try to open the iOS app
-          window.location.href = iosAppUrl;
-
-          // Fallback to the web URL if the app is not installed
-          setTimeout(() => {
-            window.location.href = webUrl;
-          }, 2000); // 2 seconds timeout
-        } else {
-          // Open in the browser for non-iOS devices
-          window.open(webUrl, "_blank");
-        }
+        const webUrl = `https://prizepicks.onelink.me/gCQS/?projections=${projections}`;
+        window.open(webUrl, "_blank");
       } else {
         console.error("No selections available to create a bet URL!");
         toast.error("No selections available!");
@@ -113,7 +98,7 @@ function App() {
       var htmltest;
       htmltest = `<button class="shadow__btn" id="betonPP" style="display: none" onclick="handleBetButtonClick()">
   <span>
-    <img src="https://cdn.prod.website-files.com/64b5f8bfc12b3ec8aef889d7/64e61222b6292fb6b7113f15_Favicon.png" alt="icon" />Bet ↗
+    <img src="https://cdn.prod.website-files.com/64b5f8bfc12b3ec8aef889d7/64e61222b6292fb6b7113f15_Favicon.png" alt="icon" />Bet
   </span>
 </button>`;
       document.title = "Liam Odds | All Sports";
