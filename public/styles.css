@@ -647,6 +647,7 @@ button:hover span:after {
   transition: background-color 0.3s;
 }
 .shadow__btn {
+  margin: 20px;
   padding: 10px 20px;
   border: none;
   font-size: 17px;
@@ -657,6 +658,7 @@ button:hover span:after {
   text-transform: uppercase;
   transition: 0.5s;
   transition-property: box-shadow;
+  cursor: pointer;
 }
 
 .shadow__btn {

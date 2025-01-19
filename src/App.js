@@ -96,11 +96,11 @@ function App() {
       const responseContainer2 = document.getElementById("responseContainer");
       responseContainer2.innerHTML = "";
       var htmltest;
-      htmltest = `<button class="shadow__btn" id="betonPP" style="display: none" onclick="handleBetButtonClick()">
+      htmltest = `<a class="shadow__btn" id="betonPP" style="display: none" onclick="handleBetButtonClick()">
   <span>
     <img src="https://cdn.prod.website-files.com/64b5f8bfc12b3ec8aef889d7/64e61222b6292fb6b7113f15_Favicon.png" alt="icon" />Bet
   </span>
-</button>`;
+</a>`;
       document.title = "Liam Odds | All Sports";
       if (isMobile()) {
         console.log("User is on a mobile device.");
