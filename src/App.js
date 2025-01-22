@@ -92,7 +92,7 @@ function App() {
     }
     window.handleBetButtonClick = handleBetButtonClick;
     window.updateexports = updateexports;
-    function papaer() {
+    function papaer(reffunc, nametype) {
       const responseContainer2 = document.getElementById("responseContainer");
       responseContainer2.innerHTML = "";
       var htmltest;
@@ -101,7 +101,7 @@ function App() {
     <img src="https://cdn.prod.website-files.com/64b5f8bfc12b3ec8aef889d7/64e61222b6292fb6b7113f15_Favicon.png" alt="icon" />Bet
   </span>
 </a>`;
-      document.title = "Liam Odds | All Sports";
+      document.title = "Liam Odds | " + nametype;
       if (isMobile()) {
         console.log("User is on a mobile device.");
 
@@ -131,7 +131,7 @@ function App() {
               console.log("User has access to premium content.");
               //document.getElementById("subscribetothis").remove();
               const dbRef = ref(database);
-              get(child(dbRef, `/paidContent`))
+              get(child(dbRef, reffunc))
                 .then((data) => {
                   console.log(data.val());
                   const props = data.val();
@@ -676,7 +676,10 @@ function App() {
       }
     };
     const loadpaid = () => {
-      papaer();
+      papaer("/paidContent", "All Sports");
+    };
+    const loadgoblins = () => {
+      papaer("/goblins", "Goblins");
     };
     const handlesubscribe = () => {
       function isValidEmail(email) {
@@ -716,7 +719,10 @@ function App() {
     };
     onAuthStateChanged(auth, (user) => {
       if (localStorage.getItem("sport") === "best_sprt") {
-        papaer();
+        papaer("/paidContent", "All Sports");
+      }
+      if (localStorage.getItem("sport") === "goblins") {
+        papaer("/goblins", "Goblins");
       }
       if (user) {
         document.getElementById("in").style.display = "none";
@@ -762,6 +768,8 @@ function App() {
     const logoutbutton = document.getElementById("logout");
     const paystart = document.getElementById("payup");
     const bestsprt = document.getElementById("best");
+    const goblinsclick = document.getElementById("goblins");
+
     const portalbutton = document.getElementById("accountinfo");
 
     if (googleSignInButton)
@@ -777,6 +785,7 @@ function App() {
     if (logoutbutton) logoutbutton.addEventListener("click", handleLogOut);
     if (paystart) paystart.addEventListener("click", starttopay);
     if (bestsprt) bestsprt.addEventListener("click", loadpaid);
+    if (goblinsclick) goblinsclick.addEventListener("click", loadgoblins);
     if (portalbutton) portalbutton.addEventListener("click", portalrequest);
 
     return () => {
@@ -793,6 +802,7 @@ function App() {
       if (logoutbutton) logoutbutton.removeEventListener("click", handleLogOut);
       if (paystart) paystart.removeEventListener("click", starttopay);
       if (bestsprt) bestsprt.removeEventListener("click", loadpaid);
+      if (goblinsclick) goblinsclick.removeEventListener("click", loadgoblins);
       if (portalbutton)
         portalbutton.removeEventListener("click", portalrequest);
     };
