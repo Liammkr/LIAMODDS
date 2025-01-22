@@ -156,6 +156,7 @@
           alt="Your Image"
           class="img2"
         />
+        <!--<span style="font-family: yourFontName; font-size: 50px">L K R</span>-->
       </div>
       <button
         onclick="document.getElementById('overlay').style.display = 'flex'"
@@ -233,13 +234,13 @@
       <button id="goblins" class="tree" onclick="changesprt('goblins')">
         <img
           style="width: auto; height: 40px; padding: 10px"
-          src="https://app.prizepicks.com/e00b98475351cdfd1c38.png"
+          src="images/goblin.png"
         />
       </button>
       <button id="demons" class="tree" onclick="changesprt('demons')">
         <img
           style="width: auto; height: 40px; padding: 10px"
-          src="https://app.prizepicks.com/7534b2e82fa0ac08ec43.png"
+          src="images/demon.png"
         />
       </button>
       <!--<button id="nba" class="tree" onclick="changesprt('basketball_nba')">
@@ -303,6 +304,22 @@
       </div>
     </div>
     <div id="notis" class="form-container"></div>
+    <div
+      id="loading"
+      class="three-body"
+      style="
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        display: none;
+      "
+    >
+      <div class="three-body__dot"></div>
+      <div class="three-body__dot"></div>
+      <div class="three-body__dot"></div>
+    </div>
     <script src="script.js"></script>
     <script src="makereq.js"></script>
     <script src="findplayerinfo.js"></script>

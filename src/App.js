@@ -147,7 +147,7 @@ function App() {
             }" alt="Main Image" style="display: block; max-width: 100%; height: auto;">
             ${
               nametype === "Goblins"
-                ? `<img src="https://app.prizepicks.com/e00b98475351cdfd1c38.png" 
+                ? `<img src="images/goblin.png" 
                        alt="Overlay Image" 
                        style="position: absolute; bottom: 0; right: 0; width: ${
                          isMobile() ? 20 : 40
@@ -156,7 +156,7 @@ function App() {
             }
             ${
               nametype === "Demons"
-                ? `<img src="https://app.prizepicks.com/7534b2e82fa0ac08ec43.png" 
+                ? `<img src="images/demon.png" 
                        alt="Overlay Image" 
                        style="position: absolute; bottom: 0; right: 0; width: ${
                          isMobile() ? 20 : 40
@@ -214,10 +214,15 @@ function App() {
 
           htmltest += `
                 <div class="card">
+                <div style="position: relative; display: inline-block; height:100%">
+    <img src="images/${
+      data.sport
+    }.png" style="width:50px; height:auto; position:absolute; left:0; top:0;">
+    </div>
                     <img src="${data.url}" alt="${data.name}">
                     <div class="info">
                         <div class="player-info">
-                            <div>${data.sport} ${data.name}</div>
+                            <div>${data.name}</div>
                         </div>
                         <div class="points">
                             ${data.line} <span>${data.market}</span>
@@ -237,10 +242,15 @@ function App() {
           for (let i = 0; i < mobileornot; i++) {
             htmltest += `
                     <div class="card" style="filter: blur(10px)">
+                         <div style="position: relative; display: inline-block; height:100%">
+    <img src="images/${
+      data.sport
+    }.png" style="width:50px; height:auto; position:absolute; left:0; top:0;">
+    </div>
                         <img src="${data.url}" alt="${data.name}">
                         <div class="info">
                             <div class="player-info">
-                                <div>${data.sport} ${data.name}</div>
+                                <div>${data.name}</div>
                             </div>
                             <div class="points">
                                 ${data.line} <span>${data.market}</span>
@@ -363,6 +373,7 @@ function App() {
       const auth = getAuth();
       const user = auth.currentUser;
       if (user) {
+        document.getElementById("loading").style.display = "block";
         fetch(
           "https://smiling-lively-fabrosaurus.glitch.me/create-checkout-session?email=" +
             user.email
@@ -387,7 +398,7 @@ function App() {
     const portalrequest = async () => {
       const auth = getAuth();
       const user = auth.currentUser;
-
+      document.getElementById("loading").style.display = "block";
       if (user) {
         const useremailtemp = user.email;
 
@@ -411,7 +422,8 @@ function App() {
           window.location.href = data.url; // Redirect the user to the Customer Portal
         } catch (error) {
           console.error("Error opening customer portal:", error);
-          alert("Failed to open customer portal. Please try again.");
+          toast.error("No Current Subscriptions. Please try again.");
+          document.getElementById("loading").style.display = "none";
         }
       } else {
         toast.error("Error Occurred: User is not authenticated");
