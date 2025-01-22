@@ -519,55 +519,31 @@ function App() {
       }
     });
 
-    const googleSignInButton = document.getElementById("google-sign-in");
-    const googleSignInButton2 = document.getElementById("google-sign-in2");
-    const signUpButton = document.getElementById("sign-up");
-    const logInButton = document.getElementById("log-in");
-    const resetPasswordButton = document.getElementById("reset-password");
-    const subscribeButton = document.getElementById("subscribe");
-    const logoutbutton = document.getElementById("logout");
-    const paystart = document.getElementById("payup");
-    const bestsprt = document.getElementById("best");
-    const goblinsclick = document.getElementById("goblins");
-    const demonsclick = document.getElementById("demons");
-    const portalbutton = document.getElementById("accountinfo");
+    const buttons = [
+      { id: "google-sign-in", handler: handleGoogleSignIn },
+      { id: "google-sign-in2", handler: handleGoogleSignIn },
+      { id: "sign-up", handler: handleSignUp },
+      { id: "log-in", handler: handleLogIn },
+      { id: "reset-password", handler: handleResetPassword },
+      { id: "subscribe", handler: handlesubscribe },
+      { id: "logout", handler: handleLogOut },
+      { id: "payup", handler: starttopay },
+      { id: "best", handler: loadpaid },
+      { id: "goblins", handler: loadgoblins },
+      { id: "demons", handler: loaddemons },
+      { id: "accountinfo", handler: portalrequest },
+    ];
 
-    if (googleSignInButton)
-      googleSignInButton.addEventListener("click", handleGoogleSignIn);
-    if (googleSignInButton2)
-      googleSignInButton2.addEventListener("click", handleGoogleSignIn);
-    if (signUpButton) signUpButton.addEventListener("click", handleSignUp);
-    if (logInButton) logInButton.addEventListener("click", handleLogIn);
-    if (resetPasswordButton)
-      resetPasswordButton.addEventListener("click", handleResetPassword);
-    if (subscribeButton)
-      subscribeButton.addEventListener("click", handlesubscribe);
-    if (logoutbutton) logoutbutton.addEventListener("click", handleLogOut);
-    if (paystart) paystart.addEventListener("click", starttopay);
-    if (bestsprt) bestsprt.addEventListener("click", loadpaid);
-    if (goblinsclick) goblinsclick.addEventListener("click", loadgoblins);
-    if (demonsclick) demonsclick.addEventListener("click", loaddemons);
-    if (portalbutton) portalbutton.addEventListener("click", portalrequest);
+    buttons.forEach(({ id, handler }) => {
+      const button = document.getElementById(id);
+      if (button) button.addEventListener("click", handler);
+    });
 
     return () => {
-      if (googleSignInButton)
-        googleSignInButton.removeEventListener("click", handleGoogleSignIn);
-      if (googleSignInButton2)
-        googleSignInButton2.removeEventListener("click", handleGoogleSignIn);
-      if (signUpButton) signUpButton.removeEventListener("click", handleSignUp);
-      if (logInButton) logInButton.removeEventListener("click", handleLogIn);
-      if (resetPasswordButton)
-        resetPasswordButton.removeEventListener("click", handleResetPassword);
-      if (subscribeButton)
-        subscribeButton.removeEventListener("click", handlesubscribe);
-      if (logoutbutton) logoutbutton.removeEventListener("click", handleLogOut);
-      if (paystart) paystart.removeEventListener("click", starttopay);
-      if (bestsprt) bestsprt.removeEventListener("click", loadpaid);
-      if (goblinsclick) goblinsclick.removeEventListener("click", loadgoblins);
-      if (demonsclick) demonsclick.removeEventListener("click", loaddemons);
-
-      if (portalbutton)
-        portalbutton.removeEventListener("click", portalrequest);
+      buttons.forEach(({ id, handler }) => {
+        const button = document.getElementById(id);
+        if (button) button.removeEventListener("click", handler);
+      });
     };
   }, []);
 
