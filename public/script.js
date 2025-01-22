@@ -328,7 +328,11 @@ function loadDataFromFile(filePath, callback) {
 
 document.getElementById("sportSelect").addEventListener("change", function () {
   console.log(this.value);
-  if (this.value != "best_sprt" && this.value != "goblins") {
+  if (
+    this.value != "best_sprt" &&
+    this.value != "goblins" &&
+    this.value != "demons"
+  ) {
     if (this.value == "basketball_nba") {
       sportvalue = "NBA";
     }

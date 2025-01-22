@@ -93,125 +93,97 @@ function App() {
     window.handleBetButtonClick = handleBetButtonClick;
     window.updateexports = updateexports;
     function papaer(reffunc, nametype) {
+      window.prizepicksexportids = [];
       const responseContainer2 = document.getElementById("responseContainer");
       responseContainer2.innerHTML = "";
-      var htmltest;
-      htmltest = `<a class="shadow__btn" id="betonPP" style="display: none" onclick="handleBetButtonClick()">
-  <span>
-    <img src="https://cdn.prod.website-files.com/64b5f8bfc12b3ec8aef889d7/64e61222b6292fb6b7113f15_Favicon.png" alt="icon" />Bet
-  </span>
-</a>`;
+
+      let htmltest = `
+        <a class="shadow__btn" id="betonPP" style="display: none" onclick="handleBetButtonClick()">
+            <span>
+                <img src="https://cdn.prod.website-files.com/64b5f8bfc12b3ec8aef889d7/64e61222b6292fb6b7113f15_Favicon.png" alt="icon" />
+                Bet
+            </span>
+        </a>`;
+
       document.title = "Liam Odds | " + nametype;
-      if (isMobile()) {
-        console.log("User is on a mobile device.");
 
-        htmltest += '<div style="width:100%"class="grid-container">';
-      } else {
-        console.log("User is on a desktop device.");
+      htmltest += isMobile()
+        ? '<div style="width:100%" class="grid-container">'
+        : '<div style="width:80%" class="grid-container">';
 
-        htmltest += '<div style="width:80%"class="grid-container">';
-      }
       const auth = getAuth();
       const user = auth.currentUser;
+
       if (user) {
         user
           .getIdToken(true)
-          .then((idToken) => {
-            console.log("ID Token refreshed with new custom claims:", idToken);
-            // Proceed with your logic using the updated token
-          })
-          .catch((error) => {
-            console.error("Error refreshing ID Token:", error);
-          });
+          .then((idToken) =>
+            console.log("ID Token refreshed with new custom claims:", idToken)
+          )
+          .catch((error) => console.error("Error refreshing ID Token:", error));
+
         user
           .getIdTokenResult()
           .then((idTokenResult) => {
             console.log(idTokenResult.claims);
+
             if (idTokenResult.claims.premium) {
-              console.log("User has access to premium content.");
-              //document.getElementById("subscribetothis").remove();
               const dbRef = ref(database);
+
               get(child(dbRef, reffunc))
                 .then((data) => {
-                  console.log(data.val());
                   const props = data.val();
-                  console.log(props);
-                  for (let i = 0; i < props.length; i++) {
-                    console.log(props[i]);
-                    if (props[i].over > props[i].under) {
-                      htmltest +=
-                        `<div class="card">
-                            <img src="` +
-                        props[i].url +
-                        `" alt="` +
-                        props[i].name +
-                        `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                        props[i].sport +
-                        " " +
-                        props[i].name +
-                        `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                        props[i].line +
-                        ` <span>` +
-                        props[i].market +
-                        `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="more">LESS</button>
-                                    <button onclick="updateexports(this,` +
-                        props[i].playerid +
-                        `,` +
-                        props[i].line +
-                        `,'o')" class="right">MORE ` +
-                        props[i].over +
-                        `%</button>
-                                </div>
-                            </div>
-                        </div>`;
-                    } else {
-                      htmltest +=
-                        `<div class="card">
-                            <img src="` +
-                        props[i].url +
-                        `" alt="` +
-                        props[i].name +
-                        `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                        props[i].sport +
-                        " " +
-                        props[i].name +
-                        `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                        props[i].line +
-                        ` <span>` +
-                        props[i].market +
-                        `</span>
-                                </div>
-                                <div class="buttons">
-                                <button onclick="updateexports(this,` +
-                        props[i].playerid +
-                        `,` +
-                        props[i].line +
-                        `,'u')" class="right">LESS ` +
-                        props[i].under +
-                        `%</button>
-                                    <button class="more">MORE</button>
-                                </div>
-                            </div>
-                        </div>`;
-                    }
-                  }
+                  props.forEach((prop) => {
+                    htmltest += `
+    <div class="card">
+    <div style="position: relative; display: inline-block; height:100%">
+    <img src="images/${
+      prop.sport
+    }.png" style="width:50px; height:auto; position:absolute; left:0; top:0;">
+    </div>
+        <div style="position: relative; display: inline-block;">
+            <img src="${
+              prop.url
+            }" alt="Main Image" style="display: block; max-width: 100%; height: auto;">
+            ${
+              nametype === "Goblins"
+                ? `<img src="https://app.prizepicks.com/e00b98475351cdfd1c38.png" 
+                       alt="Overlay Image" 
+                       style="position: absolute; bottom: 0; right: 0; width: ${
+                         isMobile() ? 20 : 40
+                       }px; height: auto;">`
+                : ""
+            }
+            ${
+              nametype === "Demons"
+                ? `<img src="https://app.prizepicks.com/7534b2e82fa0ac08ec43.png" 
+                       alt="Overlay Image" 
+                       style="position: absolute; bottom: 0; right: 0; width: ${
+                         isMobile() ? 20 : 40
+                       }px; height: auto;">`
+                : ""
+            }
+        </div>
+        <div class="info">
+            <div class="player-info">
+                <div>${prop.name}</div>
+            </div>
+            <div class="points">
+                ${prop.line} <span>${prop.market}</span>
+            </div>
+            <div class="buttons">
+                ${
+                  prop.over > prop.under || nametype === "Demons"
+                    ? `<button class="more">LESS</button>
+                       <button onclick="updateexports(this, ${prop.playerid}, ${prop.line}, 'o')" class="right">MORE ${prop.over}%</button>`
+                    : `<button onclick="updateexports(this, ${prop.playerid}, ${prop.line}, 'u')" class="right">LESS ${prop.under}%</button>
+                       <button class="more">MORE</button>`
+                }
+            </div>
+        </div>
+    </div>`;
+                  });
                   htmltest += "</div>";
-
                   responseContainer2.innerHTML = htmltest;
                 })
                 .catch((error) => {
@@ -220,308 +192,78 @@ function App() {
                     "Permission denied. Unable to access paid content."
                   );
                 });
-
-              console.log("User is paid");
             } else {
-              console.log("User does not have access to premium content.");
-              fetch(
-                "https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/uploads%2Ftop1.json?alt=media"
-              )
-                .then((response) => response.json())
-                .then((data) => {
-                  var mobileornot = 2;
-                  if (isMobile()) {
-                    console.log("User is on a mobile device.");
-                    mobileornot = 1;
-                  } else {
-                    console.log("User is on a desktop device.");
-                    mobileornot = 2;
-                  }
-                  if (data.over >= data.under) {
-                    htmltest +=
-                      `<div class="card">
-                            <img src="` +
-                      data.url +
-                      `" alt="` +
-                      data.name +
-                      `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                      data.sport +
-                      " " +
-                      data.name +
-                      `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                      data.line +
-                      ` <span>` +
-                      data.market +
-                      `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="more">LESS</button>
-                                    <button class="right">MORE ` +
-                      data.over +
-                      `%</button>
-                                </div>
-                            </div>
-                        </div>`;
-                    for (let i = 0; i < 2; i++) {
-                      htmltest +=
-                        `<div class="card" style="filter: blur(10px)">
-                            <img src="` +
-                        data.url +
-                        `" alt="` +
-                        data.name +
-                        `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                        data.sport +
-                        " " +
-                        data.name +
-                        `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                        data.line +
-                        ` <span>` +
-                        data.market +
-                        `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="more">LESS</button>
-                                    <button class="right">MORE ` +
-                        data.over +
-                        `%</button>
-                                </div>
-                            </div>
-                        </div>`;
-                    }
-                  } else if (data.over < data.under) {
-                    htmltest +=
-                      `<div class="card ">
-                            <img src="` +
-                      data.url +
-                      `" alt="` +
-                      data.name +
-                      `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                      data.sport +
-                      " " +
-                      data.name +
-                      `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                      data.line +
-                      ` <span>` +
-                      data.market +
-                      `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="right">LESS ` +
-                      data.under +
-                      `%</button>
-                                    <button class="more">MORE</button>
-                                </div>
-                            </div>
-                        </div>`;
-                    for (let i = 0; i < mobileornot; i++) {
-                      htmltest +=
-                        `<div class="card" style="filter: blur(10px)">
-                            <img src="` +
-                        data.url +
-                        `" alt="` +
-                        data.name +
-                        `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                        data.sport +
-                        " " +
-                        data.name +
-                        `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                        data.line +
-                        ` <span>` +
-                        data.market +
-                        `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="right">LESS ` +
-                        data.under +
-                        `%</button>
-                                    <button class="more">MORE</button>
-                                </div>
-                            </div>
-                        </div>`;
-                    }
-                  }
-                  htmltest += "</div>";
-
-                  responseContainer2.innerHTML = htmltest;
-                });
-              // Inform the user they do not have access
+              fetchNonPremiumContent(htmltest, responseContainer2);
             }
           })
-          .catch((error) => {
-            console.error("Error fetching token result:", error);
-          });
+          .catch((error) =>
+            console.error("Error fetching token result:", error)
+          );
       } else {
-        fetch(
-          "https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/uploads%2Ftop1.json?alt=media"
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            var mobileornot = 2;
-            if (isMobile()) {
-              console.log("User is on a mobile device.");
-              mobileornot = 1;
-            } else {
-              console.log("User is on a desktop device.");
-              mobileornot = 2;
-            }
-            if (data.over >= data.under) {
-              htmltest +=
-                `<div class="card">
-                            <img src="` +
-                data.url +
-                `" alt="` +
-                data.name +
-                `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                data.sport +
-                " " +
-                data.name +
-                `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                data.line +
-                ` <span>` +
-                data.market +
-                `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="more">LESS</button>
-                                    <button class="right">MORE ` +
-                data.over +
-                `%</button>
-                                </div>
+        fetchNonPremiumContent(htmltest, responseContainer2);
+      }
+    }
+
+    function fetchNonPremiumContent(htmltest, responseContainer2) {
+      fetch(
+        "https://firebasestorage.googleapis.com/v0/b/liamkrodds.appspot.com/o/uploads%2Ftop1.json?alt=media"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          const mobileornot = isMobile() ? 1 : 2;
+
+          htmltest += `
+                <div class="card">
+                    <img src="${data.url}" alt="${data.name}">
+                    <div class="info">
+                        <div class="player-info">
+                            <div>${data.sport} ${data.name}</div>
+                        </div>
+                        <div class="points">
+                            ${data.line} <span>${data.market}</span>
+                        </div>
+                        <div class="buttons">
+                            ${
+                              data.over >= data.under
+                                ? `<button class="more">LESS</button>
+                                       <button class="right">MORE ${data.over}%</button>`
+                                : `<button class="right">LESS ${data.under}%</button>
+                                       <button class="more">MORE</button>`
+                            }
+                        </div>
+                    </div>
+                </div>`;
+
+          for (let i = 0; i < mobileornot; i++) {
+            htmltest += `
+                    <div class="card" style="filter: blur(10px)">
+                        <img src="${data.url}" alt="${data.name}">
+                        <div class="info">
+                            <div class="player-info">
+                                <div>${data.sport} ${data.name}</div>
                             </div>
-                        </div>`;
-              for (let i = 0; i < 2; i++) {
-                htmltest +=
-                  `<div class="card" style="filter: blur(10px)">
-                            <img src="` +
-                  data.url +
-                  `" alt="` +
-                  data.name +
-                  `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                  data.sport +
-                  " " +
-                  data.name +
-                  `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                  data.line +
-                  ` <span>` +
-                  data.market +
-                  `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="more">LESS</button>
-                                    <button class="right">MORE ` +
-                  data.over +
-                  `%</button>
-                                </div>
+                            <div class="points">
+                                ${data.line} <span>${data.market}</span>
                             </div>
-                        </div>`;
-              }
-            } else if (data.over < data.under) {
-              htmltest +=
-                `<div class="card ">
-                            <img src="` +
-                data.url +
-                `" alt="` +
-                data.name +
-                `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                data.sport +
-                " " +
-                data.name +
-                `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                data.line +
-                ` <span>` +
-                data.market +
-                `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="right">LESS ` +
-                data.under +
-                `%</button>
-                                    <button class="more">MORE</button>
-                                </div>
-                            </div>
-                        </div>`;
-              for (let i = 0; i < mobileornot; i++) {
-                htmltest +=
-                  `
-                  <div class="card" style="filter: blur(10px)">
-                            <img src="` +
-                  data.url +
-                  `" alt="` +
-                  data.name +
-                  `">
-                            <div class="info">
-                                <div class="player-info">
-                                    <div>` +
-                  data.sport +
-                  " " +
-                  data.name +
-                  `</div>
-                                </div>
-                                <div class="points">
-                                    ` +
-                  data.line +
-                  ` <span>` +
-                  data.market +
-                  `</span>
-                                </div>
-                                <div class="buttons">
-                                    <button class="right">LESS ` +
-                  data.under +
-                  `%</button>
-                                    <button class="more">MORE</button>
-                                </div>
+                            <div class="buttons">
+                                ${
+                                  data.over >= data.under
+                                    ? `<button class="more">LESS</button>
+                                           <button class="right">MORE ${data.over}%</button>`
+                                    : `<button class="right">LESS ${data.under}%</button>
+                                           <button class="more">MORE</button>`
+                                }
                             </div>
                         </div>
-`;
-              }
-            }
-            htmltest += "</div>";
+                    </div>`;
+          }
 
-            responseContainer2.innerHTML = htmltest;
-          });
-      }
+          htmltest += "</div>";
+          responseContainer2.innerHTML = htmltest;
+        })
+        .catch((error) =>
+          console.error("Error fetching non-premium content:", error)
+        );
     }
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -681,6 +423,9 @@ function App() {
     const loadgoblins = () => {
       papaer("/goblins", "Goblins");
     };
+    const loaddemons = () => {
+      papaer("/demons", "Demons");
+    };
     const handlesubscribe = () => {
       function isValidEmail(email) {
         // Regular expression for validating an email
@@ -723,6 +468,9 @@ function App() {
       }
       if (localStorage.getItem("sport") === "goblins") {
         papaer("/goblins", "Goblins");
+      }
+      if (localStorage.getItem("sport") === "demons") {
+        papaer("/demons", "Demons");
       }
       if (user) {
         document.getElementById("in").style.display = "none";
@@ -769,7 +517,7 @@ function App() {
     const paystart = document.getElementById("payup");
     const bestsprt = document.getElementById("best");
     const goblinsclick = document.getElementById("goblins");
-
+    const demonsclick = document.getElementById("demons");
     const portalbutton = document.getElementById("accountinfo");
 
     if (googleSignInButton)
@@ -786,6 +534,7 @@ function App() {
     if (paystart) paystart.addEventListener("click", starttopay);
     if (bestsprt) bestsprt.addEventListener("click", loadpaid);
     if (goblinsclick) goblinsclick.addEventListener("click", loadgoblins);
+    if (demonsclick) demonsclick.addEventListener("click", loaddemons);
     if (portalbutton) portalbutton.addEventListener("click", portalrequest);
 
     return () => {
@@ -803,6 +552,8 @@ function App() {
       if (paystart) paystart.removeEventListener("click", starttopay);
       if (bestsprt) bestsprt.removeEventListener("click", loadpaid);
       if (goblinsclick) goblinsclick.removeEventListener("click", loadgoblins);
+      if (demonsclick) demonsclick.removeEventListener("click", loaddemons);
+
       if (portalbutton)
         portalbutton.removeEventListener("click", portalrequest);
     };

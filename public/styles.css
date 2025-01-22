@@ -680,3 +680,10 @@ button:hover span:after {
   width: 20px; /* Adjust size to match the button's style */
   height: 20px;
 }
+.goblinlogo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: auto;
+}
